@@ -1,1 +1,281 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Elsa von Knorring — Growth Marketing</title>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XMCYCTS18L"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-XMCYCTS18L');
+  </script>
+  <!-- Fonts: Display serif för rubriker + sans för UI -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      /* IDENTITET */
+      --page-bg: #f3f4f6;   /* ljus bakgrund runt panelerna */
+      --panel-bg: #dec5b9;  /* ljus beige/rosa panel */
+      --accent:   #ea561f;  /* brand-orange */
+      --ink:      #1a1a1a;
+      --muted:    rgba(26,26,26,.75);
+      --radius-xl: 18px;
+      --container-pad: clamp(24px, 5vw, 36px);
+      --panel-pad: clamp(24px, 5vw, 56px);
+      --maxw: 1200px;
+    }
+
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0; background:var(--page-bg); color:var(--ink);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      line-height:1.6; letter-spacing:.02em;
+    }
+    a{ color:inherit; }
+
+    /* ==== Globala paneler (beige/rosa) ==== */
+    .panel{ background: var(--panel-bg); border-radius: var(--radius-xl); padding: var(--panel-pad); margin: var(--container-pad); }
+
+    /* ======= MENY (vänstra hörnet) ======= */
+    .menu-wrap{ position: fixed; top: 16px; left: 16px; z-index: 100; }
+    .menu-btn{ display:inline-flex; align-items:center; gap:.6rem; border:2px solid var(--accent); background: transparent; color: var(--accent); padding: 8px 12px; border-radius: 999px; font-weight:600; cursor:pointer; }
+    .menu-btn svg{ display:block; }
+    .menu-sheet{ display:none; position: fixed; top: 56px; left: 16px; background: var(--panel-bg); border-radius: 14px; padding: 10px; border: 2px solid var(--accent); box-shadow: 0 12px 30px rgba(0,0,0,.12); }
+    .menu-sheet a{ display:block; text-decoration:none; padding: 10px 12px; border-radius: 10px; }
+    .menu-sheet a:hover{ background: rgba(0,0,0,.06); }
+
+    /* ======= HERO STARTSIDA ======= */
+    .hero{ display:grid; grid-template-columns: 1.1fr 1fr; gap: clamp(28px, 5vw, 56px); align-items:center; min-height: 86vh; max-width: var(--maxw); margin: 0 auto; }
+    @media (max-width: 980px){ .hero{ grid-template-columns: 1fr; min-height: 78svh; } }
+
+    .brand{ display:flex; flex-direction:column; gap: 1.2rem; }
+    .logo{ font-family: 'Fraunces', ui-serif, Georgia, serif; color: var(--accent); font-size: clamp(40px, 9vw, 120px); line-height:.88; letter-spacing: .01em; }
+    .sub{ color: var(--accent); text-transform: uppercase; letter-spacing: .4em; font-weight: 600; font-size: clamp(12px, 1.5vw, 14px); }
+    .outline-btn{ display:inline-block; text-decoration:none; color: var(--accent); border: 2px solid var(--accent); background: transparent; padding: 12px 24px; border-radius: 8px; font-weight: 500; transition: transform .12s ease; }
+    .outline-btn:hover{ transform: translateY(-1px); }
+
+    .cta-stack{ display:flex; flex-direction:column; gap: clamp(18px, 3.5vh, 36px); justify-self: center; width: min(520px, 90%); }
+    .pill{ appearance:none; border:none; cursor:pointer; text-decoration:none; display:grid; place-items:center; text-align:center; width: 100%; height: clamp(64px, 12vh, 88px); border-radius: 999px; background: var(--accent); color:#fff; font-weight: 600; letter-spacing: .5em; text-transform: uppercase; font-size: clamp(14px, 1.8vw, 16px); box-shadow: none; transition: transform .08s ease; }
+    .pill:hover{ transform: translateY(-2px); }
+
+    /* ======= ABOUT PANEL (enligt screenshot) ======= */
+    .about{ display:grid; grid-template-columns: 1.1fr 1fr; gap: clamp(28px, 5vw, 56px); align-items:center; max-width: var(--maxw); margin: 0 auto; }
+    @media (max-width: 980px){ .about{ grid-template-columns: 1fr; } }
+
+    .clip{
+      position: relative; aspect-ratio: 1 / 1; max-width: 520px; background:#fff; overflow:hidden; border-radius: 24px; border: 1px solid rgba(0,0,0,.06);
+    }
+    /* Skapar den stora runda "utskärningen" i nedre vänstra hörnet */
+    .clip::after{ content:""; position:absolute; left:-28%; bottom:-28%; width:70%; height:70%; border-radius:50%; background: var(--panel-bg); }
+    .clip img{ width:100%; height:100%; object-fit: cover; object-position: center; filter: grayscale(100%); }
+
+    .eyebrow{ color: var(--accent); text-transform: uppercase; letter-spacing: .5em; font-weight: 600; font-size: .9rem; }
+    .about h2{ font-family: 'Fraunces', ui-serif, Georgia, serif; color: var(--accent); font-size: clamp(28px, 4vw, 56px); margin:.4rem 0 .6rem; }
+    .about p{ color: var(--ink); opacity: .8; }
+
+    /* ======= Sektionstitlar för övrigt ======= */
+    section{ scroll-margin-top: 80px; }
+    .section{ max-width: var(--maxw); margin: 0 auto; }
+    .section h2{ font-family: 'Fraunces', ui-serif, Georgia, serif; color: var(--accent); font-size: clamp(28px, 4vw, 48px); margin: 0 0 8px; }
+    .muted{ color: var(--muted); }
+
+    /* ======= Projekt-kort (samma identitet som tidigare) ======= */
+    .grid{ display:grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
+    .project{ grid-column: span 12; display:grid; grid-template-columns: 1fr 1.2fr; min-height: 220px; border: 2px solid var(--accent); border-radius: 14px; overflow:hidden; }
+    @media (max-width: 860px){ .project{ grid-template-columns: 1fr; } }
+    .p-media{ position: relative; }
+    .p-body{ background:#fff; padding: 18px; display:flex; flex-direction:column; justify-content:space-between; }
+    .p-title{ font-size: 1.3rem; margin: 0 0 6px; font-weight: 600; }
+    .p-meta{ color: var(--muted); margin: 0; }
+
+    .bg-play{ background: radial-gradient(120px 120px at 85% 20%, rgba(255,255,255,.4), transparent), linear-gradient(180deg, #0c0b10, #23202a); color:#fff; }
+    .bg-play .mark{ position:absolute; right:16px; top:16px; width:56px; height:56px; border:1px solid rgba(255,255,255,.25); display:grid; place-items:center; }
+    .bg-play svg{ opacity:.9; }
+
+    .bg-pr{ background: linear-gradient(180deg, #fff, #f7f7f7), repeating-linear-gradient(45deg, rgba(17,17,17,.06) 0 10px, rgba(17,17,17,.03) 10px 20px); }
+    .bg-pr .quote{ position:absolute; left:16px; top:10px; font-size: 60px; color:#d0d0d0; font-weight:800; }
+
+    .bg-reflex{ background: linear-gradient(180deg, #fff, #fff), repeating-linear-gradient(45deg, #f3f3f3 0 14px, #f3f3f3 14px 28px), repeating-linear-gradient(135deg, rgba(0,0,0,.08) 0 2px, rgba(0,0,0,.08) 2px 4px); background-blend-mode: multiply, normal, normal; }
+
+    /* ======= Social ikoner ======= */
+    .social{ display:flex; gap: 10px; flex-wrap: wrap; }
+    .ic{ width:40px; height:40px; display:grid; place-items:center; border:2px solid var(--accent); border-radius: 999px; text-decoration:none; color: var(--ink); background:#fff; }
+
+    /* ======= Footer ======= */
+    footer{ padding: 32px var(--container-pad) 48px; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <!-- Meny i vänstra hörnet -->
+  <div class="menu-wrap">
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menuSheet">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      Meny
+    </button>
+    <div class="menu-sheet" id="menuSheet" role="dialog" aria-label="Meny">
+      <a href="#home" data-close>Hem</a>
+      <a href="#about" data-close>Om mig</a>
+      <a href="#cv" data-close>CV</a>
+      <a href="#projekt" data-close>Projekt</a>
+      <a href="#case" data-close>Case</a>
+      <a href="#reach" data-close>Reach out</a>
+    </div>
+  </div>
+
+  <!-- HOMEPAGE PANEL -->
+  <header id="home" class="panel">
+    <div class="hero">
+      <div class="brand">
+        <div class="logo">Elsa<br>von<br>Knorring</div>
+        <div class="sub">Growth Marketing</div>
+        <a class="outline-btn" href="#reach">Reach out</a>
+      </div>
+      <div class="cta-stack" aria-label="Primär navigering">
+        <a class="pill" href="#cv" aria-label="Gå till CV">CV</a>
+        <a class="pill" href="#projekt" aria-label="Gå till projekt">Projekt</a>
+        <a class="pill" href="#case" aria-label="Gå till case">Case</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ABOUT (ovanför CV, enligt screenshot) -->
+  <section id="about" class="panel">
+    <div class="about">
+      <figure class="clip" aria-label="Porträtt">
+        <!-- Lägg IMG_5453.jpg i samma mapp som html-filen -->
+        <img src="IMG_5453.jpg" alt="" />
+      </figure>
+      <div>
+        <div class="eyebrow">Who I am</div>
+        <h2>About Me</h2>
+        <p>Growth Marketing student och kommunikatör. Jag arbetar med strategi, PR & storytelling och innehåll som driver affär. Stilrent, mätbart och kreativt – från idé till leverans.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CV -->
+  <section id="cv" class="panel">
+    <div class="section">
+      <h2>CV</h2>
+      <p class="muted">Innehåll kommer här. Vill du kan jag lägga in ditt riktiga CV som sektion eller länk till PDF.</p>
+    </div>
+  </section>
+
+  <!-- PROJEKT -->
+  <section id="projekt" class="panel">
+    <div class="section">
+      <h2>Projekt</h2>
+      <p class="muted">Här kan vi lista dina case med samma visuella identitet.</p>
+      <div class="grid" style="margin-top:16px;">
+        <!-- Fotografiska Play -->
+        <article class="project" aria-labelledby="p1-title">
+          <div class="p-media bg-play">
+            <div class="mark" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M8 5v14l11-7-11-7z" fill="#fff"/></svg>
+            </div>
+          </div>
+          <div class="p-body">
+            <div>
+              <h3 class="p-title" id="p1-title">Fotografiska Play</h3>
+              <p class="p-meta">Lanseringskoncept och social distribution för streaming av foto- och konstinnehåll.</p>
+            </div>
+            <div class="p-meta">Roll: Koncept & Distribution</div>
+          </div>
+        </article>
+
+        <!-- PR & storytelling för hållbart varumärke -->
+        <article class="project" aria-labelledby="p2-title">
+          <div class="p-media bg-pr">
+            <div class="quote" aria-hidden="true">“</div>
+          </div>
+          <div class="p-body">
+            <div>
+              <h3 class="p-title" id="p2-title">PR & storytelling för hållbart varumärke</h3>
+              <p class="p-meta">Byggde förtroende med case, pitchar och earned media kring hållbar innovation.</p>
+            </div>
+            <div class="p-meta">Roll: PR & Story</div>
+          </div>
+        </article>
+
+        <!-- Reflexvästar LinkedIn B2B -->
+        <article class="project" aria-labelledby="p3-title">
+          <div class="p-media bg-reflex"></div>
+          <div class="p-body">
+            <div>
+              <h3 class="p-title" id="p3-title">Reflexvästar — LinkedIn B2B</h3>
+              <p class="p-meta">Leadgenererande innehåll och ABM-inlägg mot företag i London. Tydlig CTA & mätning.</p>
+            </div>
+            <div class="p-meta">Roll: Content & Growth</div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CASE -->
+  <section id="case" class="panel">
+    <div class="section">
+      <h2>Case</h2>
+      <p class="muted">Beskrivning av utvalda case.</p>
+    </div>
+  </section>
+
+  <!-- REACH OUT / Sociala medier -->
+  <section id="reach" class="panel">
+    <div class="section">
+      <h2>Reach out</h2>
+      <p class="muted">Mail: <a href="mailto:elsa.von.knorring@student.berghs.se">elsa.von.knorring@student.berghs.se</a></p>
+      <div class="social" role="list" style="margin-top:12px;">
+        <a class="ic" role="listitem" href="#" aria-label="LinkedIn" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4" stroke="currentColor"/><path d="M7.5 10.5V16.5M7.5 7.5v.01M12 16.5v-4a2 2 0 0 1 2-2c1.1 0 2 .9 2 2v4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        </a>
+        <a class="ic" role="listitem" href="#" aria-label="Instagram" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor"/><circle cx="12" cy="12" r="4" stroke="currentColor"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+        </a>
+        <a class="ic" role="listitem" href="#" aria-label="TikTok" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 3v9.5a3.5 3.5 0 1 1-3.5-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 6c1.2 1.7 3.1 2.7 5 2.7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        </a>
+        <a class="ic" role="listitem" href="#" aria-label="YouTube" target="_blank" rel="noopener">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="7" width="18" height="10" rx="3" stroke="currentColor"/><path d="M11 10l4 2-4 2v-4z" fill="currentColor"/></svg>
+        </a>
+        <a class="ic" role="listitem" href="#" aria-label="Behance" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4.5 8.5h4A2.5 2.5 0 1 1 6 11h2a2.5 2.5 0 1 1 0 5H4.5v-7.5zM18.5 16.5a3 3 0 1 0-3-3h5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M14.5 7h4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © <span id="year"></span> Elsa von Knorring
+  </footer>
+
+  <script>
+    // År i footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Meny logik
+    const btn = document.getElementById('menuBtn');
+    const sheet = document.getElementById('menuSheet');
+    btn?.addEventListener('click', () => {
+      const open = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!open));
+      sheet.style.display = open ? 'none' : 'block';
+    });
+    sheet?.addEventListener('click', (e) => {
+      const target = e.target;
+      if (target.matches('[data-close]')){
+        btn.setAttribute('aria-expanded', 'false');
+        sheet.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>
+
 
