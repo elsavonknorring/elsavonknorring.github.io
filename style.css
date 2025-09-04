@@ -1,0 +1,94 @@
+<style>
+    :root{
+      /* IDENTITET */
+      --page-bg: #f3f4f6;   /* ljus bakgrund runt panelerna */
+      --panel-bg: #dec5b9;  /* ljus beige/rosa panel */
+      --accent:   #ea561f;  /* brand-orange */
+      --ink:      #1a1a1a;
+      --muted:    rgba(26,26,26,.75);
+      --radius-xl: 18px;
+      --container-pad: clamp(24px, 5vw, 36px);
+      --panel-pad: clamp(24px, 5vw, 56px);
+      --maxw: 1200px;
+    }
+
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0; background:var(--page-bg); color:var(--ink);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      line-height:1.6; letter-spacing:.02em;
+    }
+    a{ color:inherit; }
+
+    /* ==== Globala paneler (beige/rosa) ==== */
+    .panel{ background: var(--panel-bg); border-radius: var(--radius-xl); padding: var(--panel-pad); margin: var(--container-pad); }
+
+    /* ======= MENY (vänstra hörnet) ======= */
+    .menu-wrap{ position: fixed; top: 16px; left: 16px; z-index: 100; }
+    .menu-btn{ display:inline-flex; align-items:center; gap:.6rem; border:2px solid var(--accent); background: transparent; color: var(--accent); padding: 8px 12px; border-radius: 999px; font-weight:600; cursor:pointer; }
+    .menu-btn svg{ display:block; }
+    .menu-sheet{ display:none; position: fixed; top: 56px; left: 16px; background: var(--panel-bg); border-radius: 14px; padding: 10px; border: 2px solid var(--accent); box-shadow: 0 12px 30px rgba(0,0,0,.12); }
+    .menu-sheet a{ display:block; text-decoration:none; padding: 10px 12px; border-radius: 10px; }
+    .menu-sheet a:hover{ background: rgba(0,0,0,.06); }
+
+    /* ======= HERO STARTSIDA ======= */
+    .hero{ display:grid; grid-template-columns: 1.1fr 1fr; gap: clamp(28px, 5vw, 56px); align-items:center; min-height: 86vh; max-width: var(--maxw); margin: 0 auto; }
+    @media (max-width: 980px){ .hero{ grid-template-columns: 1fr; min-height: 78svh; } }
+
+    .brand{ display:flex; flex-direction:column; gap: 1.2rem; }
+    .logo{ font-family: 'Fraunces', ui-serif, Georgia, serif; color: var(--accent); font-size: clamp(40px, 9vw, 120px); line-height:.88; letter-spacing: .01em; }
+    .sub{ color: var(--accent); text-transform: uppercase; letter-spacing: .4em; font-weight: 600; font-size: clamp(12px, 1.5vw, 14px); }
+    .outline-btn{ display:inline-block; text-decoration:none; color: var(--accent); border: 2px solid var(--accent); background: transparent; padding: 12px 24px; border-radius: 8px; font-weight: 500; transition: transform .12s ease; }
+    .outline-btn:hover{ transform: translateY(-1px); }
+
+    .cta-stack{ display:flex; flex-direction:column; gap: clamp(18px, 3.5vh, 36px); justify-self: center; width: min(520px, 90%); }
+    .pill{ appearance:none; border:none; cursor:pointer; text-decoration:none; display:grid; place-items:center; text-align:center; width: 100%; height: clamp(64px, 12vh, 88px); border-radius: 999px; background: var(--accent); color:#fff; font-weight: 600; letter-spacing: .5em; text-transform: uppercase; font-size: clamp(14px, 1.8vw, 16px); box-shadow: none; transition: transform .08s ease; }
+    .pill:hover{ transform: translateY(-2px); }
+
+    /* ======= ABOUT PANEL (enligt screenshot) ======= */
+    .about{ display:grid; grid-template-columns: 1.1fr 1fr; gap: clamp(28px, 5vw, 56px); align-items:center; max-width: var(--maxw); margin: 0 auto; }
+    @media (max-width: 980px){ .about{ grid-template-columns: 1fr; } }
+
+    .clip{
+      position: relative; aspect-ratio: 1 / 1; max-width: 520px; background:#fff; overflow:hidden; border-radius: 24px; border: 1px solid rgba(0,0,0,.06);
+    }
+    /* Skapar den stora runda "utskärningen" i nedre vänstra hörnet */
+    .clip::after{ content:""; position:absolute; left:-28%; bottom:-28%; width:70%; height:70%; border-radius:50%; background: var(--panel-bg); }
+    .clip img{ width:100%; height:100%; object-fit: cover; object-position: center; filter: grayscale(100%); }
+
+    .eyebrow{ color: var(--accent); text-transform: uppercase; letter-spacing: .5em; font-weight: 600; font-size: .9rem; }
+    .about h2{ font-family: 'Fraunces', ui-serif, Georgia, serif; color: var(--accent); font-size: clamp(28px, 4vw, 56px); margin:.4rem 0 .6rem; }
+    .about p{ color: var(--ink); opacity: .8; }
+
+    /* ======= Sektionstitlar för övrigt ======= */
+    section{ scroll-margin-top: 80px; }
+    .section{ max-width: var(--maxw); margin: 0 auto; }
+    .section h2{ font-family: 'Fraunces', ui-serif, Georgia, serif; color: var(--accent); font-size: clamp(28px, 4vw, 48px); margin: 0 0 8px; }
+    .muted{ color: var(--muted); }
+
+    /* ======= Projekt-kort (samma identitet som tidigare) ======= */
+    .grid{ display:grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
+    .project{ grid-column: span 12; display:grid; grid-template-columns: 1fr 1.2fr; min-height: 220px; border: 2px solid var(--accent); border-radius: 14px; overflow:hidden; }
+    @media (max-width: 860px){ .project{ grid-template-columns: 1fr; } }
+    .p-media{ position: relative; }
+    .p-body{ background:#fff; padding: 18px; display:flex; flex-direction:column; justify-content:space-between; }
+    .p-title{ font-size: 1.3rem; margin: 0 0 6px; font-weight: 600; }
+    .p-meta{ color: var(--muted); margin: 0; }
+
+    .bg-play{ background: radial-gradient(120px 120px at 85% 20%, rgba(255,255,255,.4), transparent), linear-gradient(180deg, #0c0b10, #23202a); color:#fff; }
+    .bg-play .mark{ position:absolute; right:16px; top:16px; width:56px; height:56px; border:1px solid rgba(255,255,255,.25); display:grid; place-items:center; }
+    .bg-play svg{ opacity:.9; }
+
+    .bg-pr{ background: linear-gradient(180deg, #fff, #f7f7f7), repeating-linear-gradient(45deg, rgba(17,17,17,.06) 0 10px, rgba(17,17,17,.03) 10px 20px); }
+    .bg-pr .quote{ position:absolute; left:16px; top:10px; font-size: 60px; color:#d0d0d0; font-weight:800; }
+
+    .bg-reflex{ background: linear-gradient(180deg, #fff, #fff), repeating-linear-gradient(45deg, #f3f3f3 0 14px, #f3f3f3 14px 28px), repeating-linear-gradient(135deg, rgba(0,0,0,.08) 0 2px, rgba(0,0,0,.08) 2px 4px); background-blend-mode: multiply, normal, normal; }
+
+    /* ======= Social ikoner ======= */
+    .social{ display:flex; gap: 10px; flex-wrap: wrap; }
+    .ic{ width:40px; height:40px; display:grid; place-items:center; border:2px solid var(--accent); border-radius: 999px; text-decoration:none; color: var(--ink); background:#fff; }
+
+    /* ======= Footer ======= */
+    footer{ padding: 32px var(--container-pad) 48px; color: var(--muted); }
+  </style>
