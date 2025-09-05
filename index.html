@@ -100,7 +100,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .bg-pr{ background: linear-gradient(180deg, #fff, #f7f7f7), repeating-linear-gradient(45deg, rgba(17,17,17,.06) 0 10px, rgba(17,17,17,.03) 10px 20px); }
     .bg-pr .quote{ position:absolute; left:16px; top:10px; font-size: 60px; color:#d0d0d0; font-weight:800; }
 
-    .bg-reflex{ background: linear-gradient(180deg, #fff, #fff), repeating-linear-gradient(45deg, #f3f3f3 0 14px, #f3f3f3 14px 28px), repeating-linear-gradient(135deg, rgba(0,0,0,.08) 0 2px, rgba(0,0,0,.08) 2px 4px); background-blend-mode: multiply, normal, normal; }
+    .bg-reflex{ background: linear-gradient(180deg, #fff, #fff), repeating-linear-gradient(45deg, #ffffff 0 14px, #f3f3f3 14px 28px), repeating-linear-gradient(135deg, rgba(0,0,0,.08) 0 2px, rgba(0,0,0,.08) 2px 4px); background-blend-mode: multiply, normal, normal; }
 
     /* ======= Social ikoner ======= */
     .social{ display:flex; gap: 10px; flex-wrap: wrap; }
@@ -170,56 +170,111 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </section>
 
-  <!-- PROJEKT -->
-  <section id="projekt" class="panel">
-    <div class="section">
-      <h2>Projekt</h2>
-      <p class="muted">Här kan vi lista dina case med samma visuella identitet.</p>
-      <div class="grid" style="margin-top:16px;">
-        <!-- Fotografiska Play -->
-        <article class="project" aria-labelledby="p1-title">
-          <div class="p-media bg-play">
-            <div class="mark" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M8 5v14l11-7-11-7z" fill="#fff"/></svg>
-            </div>
-          </div>
-          <div class="p-body">
-            <div>
-              <h3 class="p-title" id="p1-title">Fotografiska Play</h3>
-              <p class="p-meta">Lanseringskoncept och social distribution för streaming av foto- och konstinnehåll.</p>
-            </div>
-            <div class="p-meta">Roll: Koncept & Distribution</div>
-          </div>
-        </article>
+ <!-- PROJEKT -->
+<section id="projekt" class="panel">
+  <!-- Endast denna sektion är ny. Allt annat i dokumentet är oförändrat. -->
+  <style>
+    /* ======= Stil för CASE/PROJEKT inom denna sektion ======= */
+    #projekt .case-wrap{ max-width: var(--maxw); margin: 0 auto; }
+    #projekt .case-wrap h2{ font-family: 'Fraunces', ui-serif, Georgia, serif; color: var(--accent); font-size: clamp(28px, 4vw, 48px); margin: 0 0 8px; }
+    #projekt .lead{ color: var(--muted); margin-bottom: 18px; }
 
-        <!-- PR & storytelling för hållbart varumärke -->
-        <article class="project" aria-labelledby="p2-title">
-          <div class="p-media bg-pr">
-            <div class="quote" aria-hidden="true">“</div>
-          </div>
-          <div class="p-body">
-            <div>
-              <h3 class="p-title" id="p2-title">PR & storytelling för hållbart varumärke</h3>
-              <p class="p-meta">Byggde förtroende med case, pitchar och earned media kring hållbar innovation.</p>
-            </div>
-            <div class="p-meta">Roll: PR & Story</div>
-          </div>
-        </article>
+    /* Listlayout */
+    #projekt .case-grid{ display: grid; grid-template-columns: 1fr; gap: clamp(18px, 3vw, 28px); }
 
-        <!-- Reflexvästar LinkedIn B2B -->
-        <article class="project" aria-labelledby="p3-title">
-          <div class="p-media bg-reflex"></div>
-          <div class="p-body">
-            <div>
-              <h3 class="p-title" id="p3-title">Reflexvästar — LinkedIn B2B</h3>
-              <p class="p-meta">Leadgenererande innehåll och ABM-inlägg mot företag i London. Tydlig CTA & mätning.</p>
-            </div>
-            <div class="p-meta">Roll: Content & Growth</div>
-          </div>
-        </article>
-      </div>
+    /* Stora rundade kort med orange kant (inspirerat av din skiss) */
+    #projekt .case-card{
+      position: relative;
+      background: #fff;
+      border: 6px solid var(--accent);
+      border-radius: 30px;
+      padding: clamp(16px, 2.4vw, 28px);
+      min-height: 180px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    /* Den ljusare vänstersidan som i bilden */
+    #projekt .case-card::before{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        linear-gradient(90deg, rgba(234,86,31,.06) 0%, rgba(234,86,31,.06) 35%, transparent 35%);
+      pointer-events:none;
+    }
+
+    /* Innehåll */
+    #projekt .case-body{ position: relative; z-index: 1; display:flex; gap:10px; flex-direction:column; }
+    #projekt .case-title{ font-weight: 700; font-size: clamp(18px, 2.2vw, 22px); margin:0; color: var(--ink); }
+    #projekt .case-meta{ margin: 2px 0 0; color: var(--muted); }
+    #projekt .case-role{ color: var(--muted); font-size: .95rem; }
+
+    /* Åtgärd (sekundär knapp) – återanvänder din outline-stil */
+    #projekt .case-action{
+      position: relative; z-index: 1;
+      text-decoration:none;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      background: transparent;
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-weight: 600;
+      white-space: nowrap;
+      justify-self: end;
+      transition: transform .08s ease;
+    }
+    #projekt .case-action:hover{ transform: translateY(-1px); }
+
+    /* Responsiv: stacka innehåll */
+    @media (max-width: 860px){
+      #projekt .case-card{ grid-template-columns: 1fr; gap: 12px; }
+      #projekt .case-action{ justify-self: start; }
+      #projekt .case-card::before{
+        background: linear-gradient(180deg, rgba(234,86,31,.06) 0%, rgba(234,86,31,.06) 36%, transparent 36%);
+      }
+    }
+  </style>
+
+  <div class="case-wrap">
+    <h2>Projekt</h2>
+    <p class="lead">Here is my cases throughout my year at Berghs</p>
+
+    <div class="case-grid">
+      <!-- Case 1: Fotografiska Play -->
+      <article class="case-card" aria-labelledby="case1-title">
+        <div class="case-body">
+          <h3 class="case-title" id="case1-title">Fotografiska Play</h3>
+          <p class="case-meta">Lanseringskoncept och social distribution för streaming av foto- och konstinnehåll.</p>
+          <p class="case-role">Roll: Koncept &amp; Distribution</p>
+        </div>
+        <a class="case-action" href="#case">Se case</a>
+      </article>
+
+      <!-- Case 2: PR & storytelling -->
+      <article class="case-card" aria-labelledby="case2-title">
+        <div class="case-body">
+          <h3 class="case-title" id="case2-title">PR &amp; storytelling för hållbart varumärke</h3>
+          <p class="case-meta">Byggde förtroende med case, pitchar och earned media kring hållbar innovation.</p>
+          <p class="case-role">Roll: PR &amp; Story</p>
+        </div>
+        <a class="case-action" href="#case">Se case</a>
+      </article>
+
+      <!-- Case 3: Reflexvästar B2B -->
+      <article class="case-card" aria-labelledby="case3-title">
+        <div class="case-body">
+          <h3 class="case-title" id="case3-title">Reflexvästar — LinkedIn B2B</h3>
+          <p class="case-meta">Leadgenererande innehåll och ABM-inlägg mot företag i London. Tydlig CTA &amp; mätning.</p>
+          <p class="case-role">Roll: Content &amp; Growth</p>
+        </div>
+        <a class="case-action" href="#case">Se case</a>
+      </article>
     </div>
-  </section>
+  </div>
+</section>
+
 
   <!-- CASE -->
   <section id="case" class="panel">
