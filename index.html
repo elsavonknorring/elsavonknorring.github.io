@@ -5,120 +5,100 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Elsa von Knorring — Growth Marketing</title>
 
-  <!-- Data Layer init (enda tillägget) -->
-  <script>window.dataLayer = window.dataLayer || [];</script>
+  <!-- Data Layer init (måste ligga FÖRE GTM) -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    // Valfritt: markera att sidan laddats innan GTM (bra för felsökning)
+    window.dataLayer.push({
+      event: 'dl_init',
+      dl_version: '1.0'
+    });
+  </script>
 
   <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-T33J7S8H');</script>
-<!-- End Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-T33J7S8H');</script>
+  <!-- End Google Tag Manager -->
+
+  <!-- Google Analytics 4 (direkt gtag) -->
+  <!-- Viktigt: send_page_view:false för att undvika dubbelräkning om GA4 också körs via GTM -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XMCYCTS18L"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-XMCYCTS18L', { send_page_view: false });
+  </script>
+
   <!-- Fonts: Display serif för rubriker + sans för UI -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root{
-      /* IDENTITET */
-      --page-bg: #f3f4f6;   /* ljus bakgrund runt panelerna */
-      --panel-bg: #dec5b9;  /* ljus beige/rosa panel */
-      --accent:   #ea561f;  /* brand-orange */
-      --ink:      #1a1a1a;
-      --muted:    rgba(26,26,26,.75);
-      --radius-xl: 18px;
-      --container-pad: clamp(24px, 5vw, 36px);
-      --panel-pad: clamp(24px, 5vw, 56px);
-      --maxw: 1200px;
+      --page-bg:#f3f4f6; --panel-bg:#dec5b9; --accent:#ea561f; --ink:#1a1a1a; --muted:rgba(26,26,26,.75);
+      --radius-xl:18px; --container-pad:clamp(24px,5vw,36px); --panel-pad:clamp(24px,5vw,56px); --maxw:1200px;
     }
-
-    *{ box-sizing:border-box; }
-    html{ scroll-behavior:smooth; }
-    body{
-      margin:0; background:var(--page-bg); color:var(--ink);
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-      line-height:1.6; letter-spacing:.02em;
-    }
-    a{ color:inherit; }
-
-    /* ==== Globala paneler (beige/rosa) ==== */
-    .panel{ background: var(--panel-bg); border-radius: var(--radius-xl); padding: var(--panel-pad); margin: var(--container-pad); }
-
-    /* ======= MENY (vänstra hörnet) ======= */
-    .menu-wrap{ position: fixed; top: 16px; left: 16px; z-index: 100; }
-    .menu-btn{ display:inline-flex; align-items:center; gap:.6rem; border:2px solid var(--accent); background: transparent; color: var(--accent); padding: 8px 12px; border-radius: 999px; font-weight:600; cursor:pointer; }
-    .menu-btn svg{ display:block; }
-    .menu-sheet{ display:none; position: fixed; top: 56px; left: 16px; background: var(--panel-bg); border-radius: 14px; padding: 10px; border: 2px solid var(--accent); box-shadow: 0 12px 30px rgba(0,0,0,.12); }
-    .menu-sheet a{ display:block; text-decoration:none; padding: 10px 12px; border-radius: 10px; }
-    .menu-sheet a:hover{ background: rgba(0,0,0,.06); }
-
-    /* ======= HERO STARTSIDA ======= */
-    .hero{ display:grid; grid-template-columns: 1.1fr 1fr; gap: clamp(28px, 5vw, 56px); align-items:center; min-height: 86vh; max-width: var(--maxw); margin: 0 auto; }
-    @media (max-width: 980px){ .hero{ grid-template-columns: 1fr; min-height: 78svh; } }
-
-    .brand{ display:flex; flex-direction:column; gap: 1.2rem; }
-    .logo{ font-family: 'Fraunces', ui-serif, Georgia, serif; color: var(--accent); font-size: clamp(40px, 9vw, 120px); line-height:.88; letter-spacing: .01em; }
-    .sub{ color: var(--accent); text-transform: uppercase; letter-spacing: .4em; font-weight: 600; font-size: clamp(12px, 1.5vw, 14px); }
-    .outline-btn{ display:inline-block; text-decoration:none; color: var(--accent); border: 2px solid var(--accent); background: transparent; padding: 12px 24px; border-radius: 8px; font-weight: 500; transition: transform .12s ease; }
-    .outline-btn:hover{ transform: translateY(-1px); }
-
-    .cta-stack{ display:flex; flex-direction:column; gap: clamp(18px, 3.5vh, 36px); justify-self: center; width: min(520px, 90%); }
-    .pill{ appearance:none; border:none; cursor:pointer; text-decoration:none; display:grid; place-items:center; text-align:center; width: 100%; height: clamp(64px, 12vh, 88px); border-radius: 999px; background: var(--accent); color:#fff; font-weight: 600; letter-spacing: .5em; text-transform: uppercase; font-size: clamp(14px, 1.8vw, 16px); box-shadow: none; transition: transform .08s ease; }
-    .pill:hover{ transform: translateY(-2px); }
-
-    /* ======= ABOUT PANEL (enligt screenshot) ======= */
-    .about{ display:grid; grid-template-columns: 1.1fr 1fr; gap: clamp(28px, 5vw, 56px); align-items:center; max-width: var(--maxw); margin: 0 auto; }
-    @media (max-width: 980px){ .about{ grid-template-columns: 1fr; } }
-
-    .clip{
-      position: relative; aspect-ratio: 1 / 1; max-width: 520px; background:#fff; overflow:hidden; border-radius: 24px; border: 1px solid rgba(0,0,0,.06);
-    }
-    /* Skapar den stora runda "utskärningen" i nedre vänstra hörnet */
-    .clip::after{ content:""; position:absolute; left:-28%; bottom:-28%; width:70%; height:70%; border-radius:50%; background: var(--panel-bg); }
-    .clip img{ width:100%; height:100%; object-fit: cover; object-position: center; filter: grayscale(100%); }
-
-    .eyebrow{ color: var(--accent); text-transform: uppercase; letter-spacing: .5em; font-weight: 600; font-size: .9rem; }
-    .about h2{ font-family: 'Fraunces', ui-serif, Georgia, serif; color: var(--accent); font-size: clamp(28px, 4vw, 56px); margin:.4rem 0 .6rem; }
-    .about p{ color: var(--ink); opacity: .8; }
-
-    /* ======= Sektionstitlar för övrigt ======= */
-    section{ scroll-margin-top: 80px; }
-    .section{ max-width: var(--maxw); margin: 0 auto; }
-    .section h2{ font-family: 'Fraunces', ui-serif, Georgia, serif; color: var(--accent); font-size: clamp(28px, 4vw, 48px); margin: 0 0 8px; }
-    .muted{ color: var(--muted); }
-
-    /* ======= Projekt-kort (samma identitet som tidigare) ======= */
-    .grid{ display:grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
-    .project{ grid-column: span 12; display:grid; grid-template-columns: 1fr 1.2fr; min-height: 220px; border: 2px solid var(--accent); border-radius: 14px; overflow:hidden; }
-    @media (max-width: 860px){ .project{ grid-template-columns: 1fr; } }
-    .p-media{ position: relative; }
-    .p-body{ background:#fff; padding: 18px; display:flex; flex-direction:column; justify-content:space-between; }
-    .p-title{ font-size: 1.3rem; margin: 0 0 6px; font-weight: 600; }
-    .p-meta{ color: var(--muted); margin: 0; }
-
-    .bg-play{ background: radial-gradient(120px 120px at 85% 20%, rgba(255,255,255,.4), transparent), linear-gradient(180deg, #0c0b10, #23202a); color:#fff; }
-    .bg-play .mark{ position:absolute; right:16px; top:16px; width:56px; height:56px; border:1px solid rgba(255,255,255,.25); display:grid; place-items:center; }
-    .bg-play svg{ opacity:.9; }
-
-    .bg-pr{ background: linear-gradient(180deg, #fff, #f7f7f7), repeating-linear-gradient(45deg, rgba(17,17,17,.06) 0 10px, rgba(17,17,17,.03) 10px 20px); }
-    .bg-pr .quote{ position:absolute; left:16px; top:10px; font-size: 60px; color:#d0d0d0; font-weight:800; }
-
-    .bg-reflex{ background: linear-gradient(180deg, #fff, #fff), repeating-linear-gradient(45deg, #ffffff 0 14px, #f3f3f3 14px 28px), repeating-linear-gradient(135deg, rgba(0,0,0,.08) 0 2px, rgba(0,0,0,.08) 2px 4px); background-blend-mode: multiply, normal, normal; }
-
-    /* ======= Social ikoner ======= */
-    .social{ display:flex; gap: 10px; flex-wrap: wrap; }
-    .ic{ width:40px; height:40px; display:grid; place-items:center; border:2px solid var(--accent); border-radius: 999px; text-decoration:none; color: var(--ink); background:#fff; }
-
-    /* ======= Footer ======= */
-    footer{ padding: 32px var(--container-pad) 48px; color: var(--muted); }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--page-bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";line-height:1.6;letter-spacing:.02em}
+    a{color:inherit}
+    .panel{background:var(--panel-bg);border-radius:var(--radius-xl);padding:var(--panel-pad);margin:var(--container-pad)}
+    .menu-wrap{position:fixed;top:16px;left:16px;z-index:100}
+    .menu-btn{display:inline-flex;align-items:center;gap:.6rem;border:2px solid var(--accent);background:transparent;color:var(--accent);padding:8px 12px;border-radius:999px;font-weight:600;cursor:pointer}
+    .menu-btn svg{display:block}
+    .menu-sheet{display:none;position:fixed;top:56px;left:16px;background:var(--panel-bg);border-radius:14px;padding:10px;border:2px solid var(--accent);box-shadow:0 12px 30px rgba(0,0,0,.12)}
+    .menu-sheet a{display:block;text-decoration:none;padding:10px 12px;border-radius:10px}
+    .menu-sheet a:hover{background:rgba(0,0,0,.06)}
+    .hero{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(28px,5vw,56px);align-items:center;min-height:86vh;max-width:var(--maxw);margin:0 auto}
+    @media (max-width:980px){.hero{grid-template-columns:1fr;min-height:78svh}}
+    .brand{display:flex;flex-direction:column;gap:1.2rem}
+    .logo{font-family:'Fraunces',ui-serif,Georgia,serif;color:var(--accent);font-size:clamp(40px,9vw,120px);line-height:.88;letter-spacing:.01em}
+    .sub{color:var(--accent);text-transform:uppercase;letter-spacing:.4em;font-weight:600;font-size:clamp(12px,1.5vw,14px)}
+    .outline-btn{display:inline-block;text-decoration:none;color:var(--accent);border:2px solid var(--accent);background:transparent;padding:12px 24px;border-radius:8px;font-weight:500;transition:transform .12s ease}
+    .outline-btn:hover{transform:translateY(-1px)}
+    .cta-stack{display:flex;flex-direction:column;gap:clamp(18px,3.5vh,36px);justify-self:center;width:min(520px,90%)}
+    .pill{appearance:none;border:none;cursor:pointer;text-decoration:none;display:grid;place-items:center;text-align:center;width:100%;height:clamp(64px,12vh,88px);border-radius:999px;background:var(--accent);color:#fff;font-weight:600;letter-spacing:.5em;text-transform:uppercase;font-size:clamp(14px,1.8vw,16px);box-shadow:none;transition:transform .08s ease}
+    .pill:hover{transform:translateY(-2px)}
+    .about{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(28px,5vw,56px);align-items:center;max-width:var(--maxw);margin:0 auto}
+    @media (max-width:980px){.about{grid-template-columns:1fr}}
+    .clip{position:relative;aspect-ratio:1/1;max-width:520px;background:#fff;overflow:hidden;border-radius:24px;border:1px solid rgba(0,0,0,.06)}
+    .clip::after{content:"";position:absolute;left:-28%;bottom:-28%;width:70%;height:70%;border-radius:50%;background:var(--panel-bg)}
+    .clip img{width:100%;height:100%;object-fit:cover;object-position:center;filter:grayscale(100%)}
+    .eyebrow{color:var(--accent);text-transform:uppercase;letter-spacing:.5em;font-weight:600;font-size:.9rem}
+    .about h2{font-family:'Fraunces',ui-serif,Georgia,serif;color:var(--accent);font-size:clamp(28px,4vw,56px);margin:.4rem 0 .6rem}
+    .about p{color:var(--ink);opacity:.8}
+    section{scroll-margin-top:80px}
+    .section{max-width:var(--maxw);margin:0 auto}
+    .section h2{font-family:'Fraunces',ui-serif,Georgia,serif;color:var(--accent);font-size:clamp(28px,4vw,48px);margin:0 0 8px}
+    .muted{color:var(--muted)}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+    .project{grid-column:span 12;display:grid;grid-template-columns:1fr 1.2fr;min-height:220px;border:2px solid var(--accent);border-radius:14px;overflow:hidden}
+    @media (max-width:860px){.project{grid-template-columns:1fr}}
+    .p-media{position:relative}
+    .p-body{background:#fff;padding:18px;display:flex;flex-direction:column;justify-content:space-between}
+    .p-title{font-size:1.3rem;margin:0 0 6px;font-weight:600}
+    .p-meta{color:var(--muted);margin:0}
+    .bg-play{background:radial-gradient(120px 120px at 85% 20%, rgba(255,255,255,.4), transparent), linear-gradient(180deg, #0c0b10, #23202a);color:#fff}
+    .bg-play .mark{position:absolute;right:16px;top:16px;width:56px;height:56px;border:1px solid rgba(255,255,255,.25);display:grid;place-items:center}
+    .bg-play svg{opacity:.9}
+    .bg-pr{background:linear-gradient(180deg,#fff,#f7f7f7),repeating-linear-gradient(45deg,rgba(17,17,17,.06) 0 10px,rgba(17,17,17,.03) 10px 20px)}
+    .bg-pr .quote{position:absolute;left:16px;top:10px;font-size:60px;color:#d0d0d0;font-weight:800}
+    .bg-reflex{background:linear-gradient(180deg,#fff,#fff),repeating-linear-gradient(45deg,#ffffff 0 14px,#f3f3f3 14px 28px),repeating-linear-gradient(135deg,rgba(0,0,0,.08) 0 2px,rgba(0,0,0,.08) 2px 4px);background-blend-mode:multiply,normal,normal}
+    .social{display:flex;gap:10px;flex-wrap:wrap}
+    .ic{width:40px;height:40px;display:grid;place-items:center;border:2px solid var(--accent);border-radius:999px;text-decoration:none;color:var(--ink);background:#fff}
+    footer{padding:32px var(--container-pad) 48px;color:var(--muted)}
   </style>
 </head>
 <body>
-    <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T33J7S8H"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T33J7S8H"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
   <!-- Meny i vänstra hörnet -->
   <div class="menu-wrap">
     <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menuSheet">
@@ -151,11 +131,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </header>
 
-  <!-- ABOUT (ovanför CV, enligt screenshot) -->
+  <!-- ABOUT -->
   <section id="about" class="panel">
     <div class="about">
       <figure class="clip" aria-label="IMG_5453.jpg">
-        <!-- Lägg IMG_5453.jpg i samma mapp som html-filen -->
         <img src="IMG_5453.jpg" alt="" />
       </figure>
       <div>
@@ -174,111 +153,62 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </section>
 
- <!-- PROJEKT -->
-<section id="projekt" class="panel">
-  <!-- Endast denna sektion är ny. Allt annat i dokumentet är oförändrat. -->
-  <style>
-    /* ======= Stil för CASE/PROJEKT inom denna sektion ======= */
-    #projekt .case-wrap{ max-width: var(--maxw); margin: 0 auto; }
-    #projekt .case-wrap h2{ font-family: 'Fraunces', ui-serif, Georgia, serif; color: var(--accent); font-size: clamp(28px, 4vw, 48px); margin: 0 0 8px; }
-    #projekt .lead{ color: var(--muted); margin-bottom: 18px; }
-
-    /* Listlayout */
-    #projekt .case-grid{ display: grid; grid-template-columns: 1fr; gap: clamp(18px, 3vw, 28px); }
-
-    /* Stora rundade kort med orange kant (inspirerat av din skiss) */
-    #projekt .case-card{
-      position: relative;
-      background: #fff;
-      border: 6px solid var(--accent);
-      border-radius: 30px;
-      padding: clamp(16px, 2.4vw, 28px);
-      min-height: 180px;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      align-items: center;
-      overflow: hidden;
-    }
-
-    /* Den ljusare vänstersidan som i bilden */
-    #projekt .case-card::before{
-      content:"";
-      position:absolute; inset:0;
-      background:
-        linear-gradient(90deg, rgba(234,86,31,.06) 0%, rgba(234,86,31,.06) 35%, transparent 35%);
-      pointer-events:none;
-    }
-
-    /* Innehåll */
-    #projekt .case-body{ position: relative; z-index: 1; display:flex; gap:10px; flex-direction:column; }
-    #projekt .case-title{ font-weight: 700; font-size: clamp(18px, 2.2vw, 22px); margin:0; color: var(--ink); }
-    #projekt .case-meta{ margin: 2px 0 0; color: var(--muted); }
-    #projekt .case-role{ color: var(--muted); font-size: .95rem; }
-
-    /* Åtgärd (sekundär knapp) – återanvänder din outline-stil */
-    #projekt .case-action{
-      position: relative; z-index: 1;
-      text-decoration:none;
-      border: 2px solid var(--accent);
-      color: var(--accent);
-      background: transparent;
-      padding: 10px 16px;
-      border-radius: 999px;
-      font-weight: 600;
-      white-space: nowrap;
-      justify-self: end;
-      transition: transform .08s ease;
-    }
-    #projekt .case-action:hover{ transform: translateY(-1px); }
-
-    /* Responsiv: stacka innehåll */
-    @media (max-width: 860px){
-      #projekt .case-card{ grid-template-columns: 1fr; gap: 12px; }
-      #projekt .case-action{ justify-self: start; }
-      #projekt .case-card::before{
-        background: linear-gradient(180deg, rgba(234,86,31,.06) 0%, rgba(234,86,31,.06) 36%, transparent 36%);
+  <!-- PROJEKT -->
+  <section id="projekt" class="panel">
+    <style>
+      #projekt .case-wrap{max-width:var(--maxw);margin:0 auto}
+      #projekt .case-wrap h2{font-family:'Fraunces',ui-serif,Georgia,serif;color:var(--accent);font-size:clamp(28px,4vw,48px);margin:0 0 8px}
+      #projekt .lead{color:var(--muted);margin-bottom:18px}
+      #projekt .case-grid{display:grid;grid-template-columns:1fr;gap:clamp(18px,3vw,28px)}
+      #projekt .case-card{position:relative;background:#fff;border:6px solid var(--accent);border-radius:30px;padding:clamp(16px,2.4vw,28px);min-height:180px;display:grid;grid-template-columns:1fr auto;align-items:center;overflow:hidden}
+      #projekt .case-card::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg, rgba(234,86,31,.06) 0%, rgba(234,86,31,.06) 35%, transparent 35%);pointer-events:none}
+      #projekt .case-body{position:relative;z-index:1;display:flex;gap:10px;flex-direction:column}
+      #projekt .case-title{font-weight:700;font-size:clamp(18px,2.2vw,22px);margin:0;color:var(--ink)}
+      #projekt .case-meta{margin:2px 0 0;color:var(--muted)}
+      #projekt .case-role{color:var(--muted);font-size:.95rem}
+      #projekt .case-action{position:relative;z-index:1;text-decoration:none;border:2px solid var(--accent);color:var(--accent);background:transparent;padding:10px 16px;border-radius:999px;font-weight:600;white-space:nowrap;justify-self:end;transition:transform .08s ease}
+      #projekt .case-action:hover{transform:translateY(-1px)}
+      @media (max-width:860px){
+        #projekt .case-card{grid-template-columns:1fr;gap:12px}
+        #projekt .case-action{justify-self:start}
+        #projekt .case-card::before{background:linear-gradient(180deg, rgba(234,86,31,.06) 0%, rgba(234,86,31,.06) 36%, transparent 36%)}
       }
-    }
-  </style>
+    </style>
 
-  <div class="case-wrap">
-    <h2>Projekt</h2>
-    <p class="lead">Here is my cases throughout my year at Berghs</p>
+    <div class="case-wrap">
+      <h2>Projekt</h2>
+      <p class="lead">Here is my cases throughout my year at Berghs</p>
 
-    <div class="case-grid">
-      <!-- Case 1: Fotografiska Play -->
-      <article class="case-card" aria-labelledby="case1-title">
-        <div class="case-body">
-          <h3 class="case-title" id="case1-title">Fotografiska Play</h3>
-          <p class="case-meta">Lanseringskoncept och social distribution för streaming av foto- och konstinnehåll.</p>
-          <p class="case-role">Roll: Koncept &amp; Distribution</p>
-        </div>
-        <a class="case-action" href="#case">Se case</a>
-      </article>
+      <div class="case-grid">
+        <article class="case-card" aria-labelledby="case1-title">
+          <div class="case-body">
+            <h3 class="case-title" id="case1-title">Fotografiska Play</h3>
+            <p class="case-meta">Lanseringskoncept och social distribution för streaming av foto- och konstinnehåll.</p>
+            <p class="case-role">Roll: Koncept &amp; Distribution</p>
+          </div>
+          <a class="case-action" href="#case">Se case</a>
+        </article>
 
-      <!-- Case 2: PR & storytelling -->
-      <article class="case-card" aria-labelledby="case2-title">
-        <div class="case-body">
-          <h3 class="case-title" id="case2-title">PR &amp; storytelling för hållbart varumärke</h3>
-          <p class="case-meta">Byggde förtroende med case, pitchar och earned media kring hållbar innovation.</p>
-          <p class="case-role">Roll: PR &amp; Story</p>
-        </div>
-        <a class="case-action" href="#case">Se case</a>
-      </article>
+        <article class="case-card" aria-labelledby="case2-title">
+          <div class="case-body">
+            <h3 class="case-title" id="case2-title">PR &amp; storytelling för hållbart varumärke</h3>
+            <p class="case-meta">Byggde förtroende med case, pitchar och earned media kring hållbar innovation.</p>
+            <p class="case-role">Roll: PR &amp; Story</p>
+          </div>
+          <a class="case-action" href="#case">Se case</a>
+        </article>
 
-      <!-- Case 3: Reflexvästar B2B -->
-      <article class="case-card" aria-labelledby="case3-title">
-        <div class="case-body">
-          <h3 class="case-title" id="case3-title">Reflexvästar — LinkedIn B2B</h3>
-          <p class="case-meta">Leadgenererande innehåll och ABM-inlägg mot företag i London. Tydlig CTA &amp; mätning.</p>
-          <p class="case-role">Roll: Content &amp; Growth</p>
-        </div>
-        <a class="case-action" href="#case">Se case</a>
-      </article>
+        <article class="case-card" aria-labelledby="case3-title">
+          <div class="case-body">
+            <h3 class="case-title" id="case3-title">Reflexvästar — LinkedIn B2B</h3>
+            <p class="case-meta">Leadgenererande innehåll och ABM-inlägg mot företag i London. Tydlig CTA &amp; mätning.</p>
+            <p class="case-role">Roll: Content &amp; Growth</p>
+          </div>
+          <a class="case-action" href="#case">Se case</a>
+        </article>
+      </div>
     </div>
-  </div>
-</section>
-
+  </section>
 
   <!-- CASE -->
   <section id="case" class="panel">
@@ -288,7 +218,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </section>
 
-  <!-- REACH OUT / Sociala medier -->
+  <!-- REACH OUT -->
   <section id="reach" class="panel">
     <div class="section">
       <h2>Reach out</h2>
@@ -336,6 +266,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         sheet.style.display = 'none';
       }
     });
+
+    // ------ DataLayer test (för felsökning) ------
+    // Pushar ett event när DOM är redo. Syns i GTM Preview/Tag Assistant.
+    document.addEventListener('DOMContentLoaded', function(){
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'dl_ready_test',
+        page_path: location.pathname,
+        page_title: document.title
+      });
+    });
+
+    // Bonus: manuellt test via hash. Besök sidan med #dl-test för att pusha ännu ett testevent.
+    if (location.hash === '#dl-test') {
+      window.dataLayer.push({ event: 'dl_hash_test', ts: Date.now() });
+      console.log('Pushed dl_hash_test to dataLayer');
+    }
   </script>
 </body>
 </html>
