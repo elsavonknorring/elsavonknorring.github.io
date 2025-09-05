@@ -342,14 +342,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     });
   </script>
   <script>
+  // make sure DL exists (safe even if it already does)
   window.dataLayer = window.dataLayer || [];
+
+  // helper
   function pushButtonClick(name){
-    dataLayer.push({ event: 'button_click', button_name: name });
+    window.dataLayer.push({ event: 'button_click', button_name: name });
+    // optional debug so you SEE it immediately in console:
+    console.log('DL push:', { event: 'button_click', button_name: name });
   }
-  document.querySelector('.pill-cv')?.addEventListener('click', () => pushButtonClick('CV'));
-  document.querySelector('.pill-projekt')?.addEventListener('click', () => pushButtonClick('Projekt'));
-  document.querySelector('.pill-case')?.addEventListener('click', () => pushButtonClick('Case'));
+
+  // event delegation: catches clicks anywhere in the doc
+  document.addEventListener('click', function (e) {
+    const el = e.target.closest('a.pill'); // any of your three pills
+    if (!el) return;
+
+    if (el.classList.contains('pill-cv'))       pushButtonClick('CV');
+    else if (el.classList.contains('pill-projekt')) pushButtonClick('Projekt');
+    else if (el.classList.contains('pill-case'))    pushButtonClick('Case');
+  });
 </script>
+
 
 </body>
 </html>
