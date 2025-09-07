@@ -145,12 +145,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="brand">
         <div class="logo">Elsa<br>von<br>Knorring</div>
         <div class="sub">Growth Marketing</div>
-        <a class="outline-btn" href="#reach">Reach out</a>
+        <!-- Reach out (hero) — endast uppdaterad här -->
+        <a class="outline-btn" href="#reach" aria-label="Reach out" data-gtm-name="reach">Reach out</a>
       </div>
+      <!-- CV / Projekt / Case — endast uppdaterad här -->
       <div class="cta-stack" aria-label="Primär navigering">
-        <a class="pill pill-cv" href="#cv" aria-label="Gå till CV">CV</a>
-        <a class="pill pill-projekt" href="#projekt" aria-label="Gå till projekt">Projekt</a>
-        <a class="pill pill-case" href="#case" aria-label="Gå till case">Case</a>
+        <a class="pill pill-cv" href="#cv" aria-label="Gå till CV" data-gtm-name="cv">CV</a>
+        <a class="pill pill-projekt" href="#projekt" aria-label="Gå till projekt" data-gtm-name="projekt">Projekt</a>
+        <a class="pill pill-case" href="#case" aria-label="Gå till case" data-gtm-name="case">Case</a>
       </div>
     </div>
   </header>
@@ -341,29 +343,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       }
     });
   </script>
-  <script>
-  // make sure DL exists (safe even if it already does)
-  window.dataLayer = window.dataLayer || [];
-
-  // helper
-  function pushButtonClick(name){
-    window.dataLayer.push({ event: 'button_click', button_name: name });
-    // optional debug so you SEE it immediately in console:
-    console.log('DL push:', { event: 'button_click', button_name: name });
-  }
-
-  // event delegation: catches clicks anywhere in the doc
-  document.addEventListener('click', function (e) {
-    const el = e.target.closest('a.pill'); // any of your three pills
-    if (!el) return;
-
-    if (el.classList.contains('pill-cv'))       pushButtonClick('CV');
-    else if (el.classList.contains('pill-projekt')) pushButtonClick('Projekt');
-    else if (el.classList.contains('pill-case'))    pushButtonClick('Case');
-  });
-</script>
-
-
+  
 </body>
 </html>
-
