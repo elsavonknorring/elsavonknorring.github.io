@@ -5,125 +5,377 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Elsa von Knorring — Growth Marketing</title>
   <script>
-  window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({
-    event: "page_ready",
-    page_name: "Elsa Portfolio"
-  });
-</script>
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: "page_ready", page_name: "Elsa Portfolio" });
+  </script>
 
   <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-T33J7S8H');</script>
-<!-- End Google Tag Manager -->
-  <!-- Fonts: Display serif för rubriker + sans för UI -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-T33J7S8H');</script>
+  <!-- End Google Tag Manager -->
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- ====== STYLE (endast den är uppdaterad) ====== -->
   <style>
     :root{
-      /* IDENTITET */
-      --page-bg: #f3f4f6;   /* ljus bakgrund runt panelerna */
-      --panel-bg: #dec5b9;  /* ljus beige/rosa panel */
-      --accent:   #ea561f;  /* brand-orange */
-      --ink:      #1a1a1a;
-      --muted:    rgba(26,26,26,.75);
-      --radius-xl: 18px;
-      --container-pad: clamp(24px, 5vw, 36px);
-      --panel-pad: clamp(24px, 5vw, 56px);
+      /* Färger enligt skiss */
+      --page-bg: #fbf1ed;      /* helsidesbakgrund */
+      --panel-bg: #f6e9e3;     /* panelbakgrund */
+      --accent:   #ea561f;     /* brand-orange */
+      --ink:      #2a1a16;     /* primär text */
+      --muted:    rgba(42,26,22,.70);
+
+      --radius-xl: 22px;
+      --container-pad: clamp(24px, 5vw, 40px);
+      --panel-pad: clamp(28px, 6vw, 64px);
       --maxw: 1200px;
     }
 
-    *{ box-sizing:border-box; }
-    html{ scroll-behavior:smooth; }
+    *{ box-sizing: border-box; }
+    html{ scroll-behavior: smooth; }
     body{
       margin:0; background:var(--page-bg); color:var(--ink);
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
       line-height:1.6; letter-spacing:.02em;
     }
-    a{ color:inherit; }
+    a{ color:inherit; text-decoration:none; }
 
-    /* ==== Globala paneler (beige/rosa) ==== */
-    .panel{ background: var(--panel-bg); border-radius: var(--radius-xl); padding: var(--panel-pad); margin: var(--container-pad); }
-
-    /* ======= MENY (vänstra hörnet) ======= */
-    .menu-wrap{ position: fixed; top: 16px; left: 16px; z-index: 100; }
-    .menu-btn{ display:inline-flex; align-items:center; gap:.6rem; border:2px solid var(--accent); background: transparent; color: var(--accent); padding: 8px 12px; border-radius: 999px; font-weight:600; cursor:pointer; }
-    .menu-btn svg{ display:block; }
-    .menu-sheet{ display:none; position: fixed; top: 56px; left: 16px; background: var(--panel-bg); border-radius: 14px; padding: 10px; border: 2px solid var(--accent); box-shadow: 0 12px 30px rgba(0,0,0,.12); }
-    .menu-sheet a{ display:block; text-decoration:none; padding: 10px 12px; border-radius: 10px; }
-    .menu-sheet a:hover{ background: rgba(0,0,0,.06); }
-
-    /* ======= HERO STARTSIDA ======= */
-    .hero{ display:grid; grid-template-columns: 1.1fr 1fr; gap: clamp(28px, 5vw, 56px); align-items:center; min-height: 86vh; max-width: var(--maxw); margin: 0 auto; }
-    @media (max-width: 980px){ .hero{ grid-template-columns: 1fr; min-height: 78svh; } }
-
-    .brand{ display:flex; flex-direction:column; gap: 1.2rem; }
-    .logo{ font-family: 'Fraunces', ui-serif, Georgia, serif; color: var(--accent); font-size: clamp(40px, 9vw, 120px); line-height:.88; letter-spacing: .01em; }
-    .sub{ color: var(--accent); text-transform: uppercase; letter-spacing: .4em; font-weight: 600; font-size: clamp(12px, 1.5vw, 14px); }
-    .outline-btn{ display:inline-block; text-decoration:none; color: var(--accent); border: 2px solid var(--accent); background: transparent; padding: 12px 24px; border-radius: 8px; font-weight: 500; transition: transform .12s ease; }
-    .outline-btn:hover{ transform: translateY(-1px); }
-
-    .cta-stack{ display:flex; flex-direction:column; gap: clamp(18px, 3.5vh, 36px); justify-self: center; width: min(520px, 90%); }
-    .pill{ appearance:none; border:none; cursor:pointer; text-decoration:none; display:grid; place-items:center; text-align:center; width: 100%; height: clamp(64px, 12vh, 88px); border-radius: 999px; background: var(--accent); color:#fff; font-weight: 600; letter-spacing: .5em; text-transform: uppercase; font-size: clamp(14px, 1.8vw, 16px); box-shadow: none; transition: transform .08s ease; }
-    .pill:hover{ transform: translateY(-2px); }
-
-    /* ======= ABOUT PANEL (enligt screenshot) ======= */
-    .about{ display:grid; grid-template-columns: 1.1fr 1fr; gap: clamp(28px, 5vw, 56px); align-items:center; max-width: var(--maxw); margin: 0 auto; }
-    @media (max-width: 980px){ .about{ grid-template-columns: 1fr; } }
-
-    .clip{
-      position: relative; aspect-ratio: 1 / 1; max-width: 520px; background:#fff; overflow:hidden; border-radius: 24px; border: 1px solid rgba(0,0,0,.06);
+    /* Paneler */
+    .panel{
+      background: var(--panel-bg);
+      border-radius: var(--radius-xl);
+      padding: var(--panel-pad);
+      margin: var(--container-pad);
+      box-shadow: 0 8px 30px rgba(0,0,0,.05) inset, 0 2px 18px rgba(0,0,0,.04);
     }
-    /* Skapar den stora runda "utskärningen" i nedre vänstra hörnet */
+
+    /* Meny */
+    .menu-wrap{ position: fixed; top:16px; left:16px; z-index:100; }
+    .menu-btn{
+      display:inline-flex; align-items:center; gap:.6rem;
+      border:2px solid var(--accent); background:transparent; color:var(--accent);
+      padding:8px 12px; border-radius:999px; font-weight:600; cursor:pointer;
+      letter-spacing:.12em; text-transform:uppercase; font-size:.8rem;
+    }
+    .menu-sheet{
+      display:none; position:fixed; top:56px; left:16px;
+      background:var(--panel-bg); border-radius:14px; padding:10px;
+      border:2px solid var(--accent); box-shadow:0 12px 30px rgba(0,0,0,.12);
+    }
+    .menu-sheet a{ display:block; padding:10px 12px; border-radius:10px; }
+    .menu-sheet a:hover{ background:rgba(0,0,0,.06); }
+
+    /* HERO */
+    .hero{
+      display:grid; grid-template-columns:1.1fr 1fr;
+      gap:clamp(28px,5vw,56px); align-items:center;
+      min-height:86vh; max-width:var(--maxw); margin:0 auto;
+    }
+    @media (max-width:980px){ .hero{ grid-template-columns:1fr; min-height:78svh; } }
+
+    .brand{ display:flex; flex-direction:column; gap:1.2rem; }
+    .logo{
+      font-family:'Fraunces', ui-serif, Georgia, serif;
+      color:var(--accent);
+      font-size:clamp(46px,10vw,120px);
+      line-height:.88; letter-spacing:.01em; font-weight:500;
+    }
+    .sub{
+      color:var(--accent); text-transform:uppercase; letter-spacing:.45em;
+      font-weight:600; font-size:clamp(12px,1.6vw,14px);
+    }
+
+    .outline-btn{
+      display:inline-block; color:var(--accent);
+      border:2px solid var(--accent); background:transparent;
+      padding:10px 20px; border-radius:8px; font-weight:600;
+      letter-spacing:.18em; text-transform:uppercase; font-size:.85rem;
+      transition: transform .1s ease, background .1s ease, box-shadow .1s ease;
+    }
+    .outline-btn:hover{ transform:translateY(-1px); background:#fff0ea; box-shadow:0 8px 18px rgba(234,86,31,.15); }
+    .outline-btn:focus-visible, .pill:focus-visible, .case-action:focus-visible{ outline:3px solid #ffb79a; outline-offset:2px; }
+
+    .cta-stack{ display:flex; flex-direction:column; gap:clamp(18px,3.5vh,36px); justify-self:center; width:min(520px,90%); }
+    .pill{
+      appearance:none; border:none; cursor:pointer; display:grid; place-items:center; text-align:center;
+      width:100%; height:clamp(64px,12vh,88px);
+      border-radius:999px; background:var(--accent); color:#fff;
+      font-weight:700; letter-spacing:.5em; text-transform:uppercase;
+      font-size:clamp(14px,1.8vw,16px);
+      transition: transform .08s ease, box-shadow .08s ease, filter .08s ease;
+    }
+    .pill:hover{ transform:translateY(-2px); box-shadow:0 10px 20px rgba(234,86,31,.25); }
+    .pill:active{ transform:translateY(0); filter:brightness(.95); }
+
+    /* ABOUT */
+    .about{ display:grid; grid-template-columns:1.1fr 1fr; gap:clamp(28px,5vw,56px); align-items:center; max-width:var(--maxw); margin:0 auto; }
+    @media (max-width:980px){ .about{ grid-template-columns:1fr; } }
+    .clip{ position:relative; aspect-ratio:1/1; max-width:520px; background:#fff; overflow:hidden; border-radius:24px; border:1px solid rgba(0,0,0,.06); }
     .clip::after{ content:""; position:absolute; left:-28%; bottom:-28%; width:70%; height:70%; border-radius:50%; background: var(--panel-bg); }
-    .clip img{ width:100%; height:100%; object-fit: cover; object-position: center; filter: grayscale(100%); }
+    .clip img{ width:100%; height:100%; object-fit:cover; object-position:center; filter:grayscale(100%); }
 
-    .eyebrow{ color: var(--accent); text-transform: uppercase; letter-spacing: .5em; font-weight: 600; font-size: .9rem; }
-    .about h2{ font-family: 'Fraunces', ui-serif, Georgia, serif; color: var(--accent); font-size: clamp(28px, 4vw, 56px); margin:.4rem 0 .6rem; }
-    .about p{ color: var(--ink); opacity: .8; }
+    .eyebrow{ color:var(--accent); text-transform:uppercase; letter-spacing:.5em; font-weight:600; font-size:.9rem; }
+    .about h2{
+      font-family:'Fraunces', ui-serif, Georgia, serif; color:var(--accent);
+      font-size:clamp(32px,5vw,56px); margin:.4rem 0 .6rem; font-weight:500; text-align:center;
+    }
+    .about p{ color:var(--ink); opacity:.85; }
 
-    /* ======= Sektionstitlar för övrigt ======= */
-    section{ scroll-margin-top: 80px; }
-    .section{ max-width: var(--maxw); margin: 0 auto; }
-    .section h2{ font-family: 'Fraunces', ui-serif, Georgia, serif; color: var(--accent); font-size: clamp(28px, 4vw, 48px); margin: 0 0 8px; }
-    .muted{ color: var(--muted); }
+    /* Sektionstitlar */
+    section{ scroll-margin-top:80px; }
+    .section{ max-width:var(--maxw); margin:0 auto; }
+    .section h2{
+      font-family:'Fraunces', ui-serif, Georgia, serif; color:var(--accent);
+      font-size:clamp(32px,5vw,56px); margin:0 0 8px; font-weight:500;
+    }
+    .muted{ color:var(--muted); }
 
-    /* ======= Projekt-kort (samma identitet som tidigare) ======= */
-    .grid{ display:grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
-    .project{ grid-column: span 12; display:grid; grid-template-columns: 1fr 1.2fr; min-height: 220px; border: 2px solid var(--accent); border-radius: 14px; overflow:hidden; }
-    @media (max-width: 860px){ .project{ grid-template-columns: 1fr; } }
-    .p-media{ position: relative; }
-    .p-body{ background:#fff; padding: 18px; display:flex; flex-direction:column; justify-content:space-between; }
-    .p-title{ font-size: 1.3rem; margin: 0 0 6px; font-weight: 600; }
-    .p-meta{ color: var(--muted); margin: 0; }
+    /* PROJEKT – kort enligt skiss */
+    #projekt .case-wrap{ max-width:var(--maxw); margin:0 auto; }
+    #projekt .case-grid{ display:grid; grid-template-columns:1fr; gap:clamp(18px,3vw,28px); }
+    #projekt .case-card{
+      position:relative; background:#fff; border:6px solid var(--accent); border-radius:28px;
+      padding:clamp(16px,2.4vw,28px); min-height:160px; display:grid; grid-template-columns:1fr auto; align-items:center; overflow:hidden;
+    }
+    #projekt .case-card::before{
+      content:""; position:absolute; inset:0;
+      background:linear-gradient(90deg, rgba(234,86,31,.06) 0%, rgba(234,86,31,.06) 35%, transparent 35%);
+      pointer-events:none;
+    }
+    #projekt .case-title{ font-weight:700; font-size:clamp(18px,2.2vw,22px); margin:0; color:var(--ink); }
+    #projekt .case-meta, #projekt .case-role{ color:var(--muted); margin:4px 0 0; }
+    #projekt .case-action{
+      position:relative; z-index:1; border:2px solid var(--accent); color:var(--accent); background:transparent;
+      padding:10px 16px; border-radius:999px; font-weight:700; text-transform:uppercase; letter-spacing:.2em; font-size:.8rem;
+      transition: transform .08s ease, background .08s ease, box-shadow .08s ease;
+    }
+    #projekt .case-action:hover{ transform:translateY(-1px); background:#fff0ea; box-shadow:0 8px 18px rgba(234,86,31,.15); }
+    @media (max-width:860px){
+      #projekt .case-card{ grid-template-columns:1fr; gap:12px; }
+      #projekt .case-action{ justify-self:start; }
+      #projekt .case-card::before{ background:linear-gradient(180deg, rgba(234,86,31,.06) 0%, rgba(234,86,31,.06) 36%, transparent 36%); }
+    }
 
-    .bg-play{ background: radial-gradient(120px 120px at 85% 20%, rgba(255,255,255,.4), transparent), linear-gradient(180deg, #0c0b10, #23202a); color:#fff; }
-    .bg-play .mark{ position:absolute; right:16px; top:16px; width:56px; height:56px; border:1px solid rgba(255,255,255,.25); display:grid; place-items:center; }
-    .bg-play svg{ opacity:.9; }
+    /* Reach out – centrerad */
+    #reach .section{ text-align:center; }
+    #reach h2{
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      text-transform:uppercase; letter-spacing:.5em; font-weight:700;
+      color: var(--muted); font-size:.95rem; margin-bottom:48px;
+    }
+    #reach .muted{
+      display:inline-block; margin-top:12px; margin-bottom:22px;
+      text-transform:uppercase; letter-spacing:.35em; color:var(--muted);
+    }
+    #reach .muted a{ border-bottom:1px solid rgba(42,26,22,.25); padding-bottom:2px; }
+    .social{ display:flex; gap:14px; flex-wrap:wrap; }
+    #reach .social{ justify-content:center; margin-top:18px; }
+    .ic{
+      width:42px; height:42px; display:grid; place-items:center;
+      border:2px solid var(--accent); border-radius:999px; color:var(--ink); background:#fff;
+      transition: transform .08s ease, background .08s ease, border-color .08s ease;
+    }
+    .ic:hover{ transform:translateY(-2px); background:#fff7f2; border-color:#f06b36; }
 
-    .bg-pr{ background: linear-gradient(180deg, #fff, #f7f7f7), repeating-linear-gradient(45deg, rgba(17,17,17,.06) 0 10px, rgba(17,17,17,.03) 10px 20px); }
-    .bg-pr .quote{ position:absolute; left:16px; top:10px; font-size: 60px; color:#d0d0d0; font-weight:800; }
+    /* Footer */
+    footer{ padding:32px var(--container-pad) 48px; color:var(--muted); text-align:center; }
+   /* --- Fixar: Projekt-rubrik + tar bort "Who I am" --- */
 
-    .bg-reflex{ background: linear-gradient(180deg, #fff, #fff), repeating-linear-gradient(45deg, #ffffff 0 14px, #f3f3f3 14px 28px), repeating-linear-gradient(135deg, rgba(0,0,0,.08) 0 2px, rgba(0,0,0,.08) 2px 4px); background-blend-mode: multiply, normal, normal; }
+/* Gör h2 "Projekt" i case-wrap orange och i Fraunces */
+#projekt .case-wrap > h2{
+  color: var(--accent);
+  font-family: 'Fraunces', ui-serif, Georgia, serif;
+  font-weight: 500;
+}
 
-    /* ======= Social ikoner ======= */
-    .social{ display:flex; gap: 10px; flex-wrap: wrap; }
-    .ic{ width:40px; height:40px; display:grid; place-items:center; border:2px solid var(--accent); border-radius: 999px; text-decoration:none; color: var(--ink); background:#fff; }
+/* Dölj "Who I am"-eyebrow helt */
+.eyebrow{ display:none !important; }
+/* Större "Projekt"-rubrik */
+#projekt .case-wrap > h2{
+  color: var(--accent);
+  font-family: 'Fraunces', ui-serif, Georgia, serif;
+  font-weight: 500;
+  font-size: clamp(40px, 6vw, 64px); /* ↑ justera vid behov */
+  margin-bottom: 10px;
+}
+/* Mindre toppmarginal i Projekt-panelen */
+#projekt.panel{
+  /* ersätter panelens standard-padding för just denna sektion */
+  padding-top: clamp(16px, 3.5vw, 28px) !important;
+  padding-bottom: clamp(24px, 5vw, 48px) !important; /* kan höjas/sänkas vid behov */
+}
 
-    /* ======= Footer ======= */
-    footer{ padding: 32px var(--container-pad) 48px; color: var(--muted); }
+/* Mindre avstånd mellan rubrik och lead-text */
+#projekt .case-wrap > h2{
+  margin-top: 0;              /* ingen extra toppmarginal */
+  margin-bottom: 6px;         /* tajtare mot lead */
+}
+
+/* Lead-texten lite tajtare */
+#projekt .lead{
+  margin-top: 0;
+  margin-bottom: 14px;        /* var 18px tidigare i din stil */
+}
+
+/* Lite mindre vertikal luft mellan korten */
+#projekt .case-grid{
+  gap: clamp(14px, 2.2vw, 22px);
+}
+
+/* Kortens egna inre padding något tajtare (valfritt) */
+#projekt .case-card{
+  padding: clamp(14px, 2vw, 22px);
+}
+/* ---- About: ta bort porträttbilden och vänsterställ texten ---- */
+
+/* Göm bilden helt (ingen HTML-ändring behövs) */
+.about .clip{ display:none !important; }
+
+/* Gör About till en enkolumnssektion och vänsterställ innehållet */
+.about{
+  grid-template-columns: 1fr !important;
+  justify-items: start;          /* vänsterkant */
+  align-items: start;
+}
+
+/* Själva textblocket i About */
+.about > div{
+  max-width: 720px;              /* bekvämt läsbredd */
+  text-align: left;
+}
+
+/* Rubriken som övriga rubriker i layouten */
+.about h2{
+  text-align: left !important;
+  font-family: 'Fraunces', ui-serif, Georgia, serif;
+  color: var(--accent);
+  font-weight: 500;
+  font-size: clamp(32px, 5vw, 56px);
+  margin: 0 0 10px;
+}
+
+/* Brödtexten lite tajtare */
+.about p{
+  margin-top: 0;
+  color: var(--ink);
+  opacity: .85;
+}
+
+/* (Du hade redan detta, men säkerställ att eyebrow är borta) */
+.eyebrow{ display:none !important; }
+
+/* Valfritt: lite mindre topp-padding i About-panelen så den matchar Projekts tajtare känsla */
+#about.panel{
+  padding-top: clamp(16px, 3.5vw, 28px) !important;
+  padding-bottom: clamp(24px, 5vw, 48px) !important;
+}/* ===== ENHETLIG LAYOUT FÖR ALLA PANELER UNDER HERO ===== */
+
+/* 1) Samma panel-padding för alla sektioner under hero */
+#about.panel,
+#cv.panel,
+#projekt.panel,
+#case.panel,
+#reach.panel{
+  padding-top: clamp(20px, 4vw, 36px) !important;
+  padding-bottom: clamp(28px, 5vw, 56px) !important;
+}
+
+/* 2) Samma “innehållscontainer” som CV-panelen (maxbredd + auto-marginal) */
+#about .about,
+#cv .section,
+#projekt .case-wrap,
+#case .section,
+#reach .section{
+  max-width: var(--maxw);
+  margin: 0 auto;
+}
+
+/* 3) Vänsterställda rubriker + samma typostil överallt (som CV) */
+#about h2,
+#cv h2,
+#projekt .case-wrap > h2,
+#case h2,
+#reach h2{
+  text-align: left !important;
+  color: var(--accent);
+  font-family: 'Fraunces', ui-serif, Georgia, serif;
+  font-weight: 500;
+  font-size: clamp(34px, 5vw, 56px);
+  margin: 0 0 8px 0;
+}
+
+/* 4) Enhetliga brödtexter/undertexter */
+#about p,
+#cv .muted,
+#projekt .lead,
+#case .muted,
+#reach .muted{
+  color: var(--muted);
+  margin-top: 6px;
+  margin-bottom: 18px;
+  text-align: left !important;
+  letter-spacing: .02em;
+}
+
+/* 5) About: samma enkla enkolumnslayout som CV (bild bort, vänsterställd text) */
+#about .clip{ display:none !important; }
+#about .about{
+  display:block !important;      /* ersätt grid */
+  justify-items: start;
+  align-items: start;
+}
+#about > .about > div{
+  max-width: 720px;
+}
+
+/* 6) Projekt: tajta topp, vänsterställd rubrik/lead, kortlistan kan vara kvar */
+#projekt .case-wrap{ padding-top: 0; }
+#projekt .case-wrap > h2{ margin-bottom: 6px; }
+#projekt .lead{ margin-bottom: 14px; }
+
+/* 7) Reach: samma vänsterställda layout (inte centrerad längre) */
+#reach .section{ text-align: left !important; }
+#reach h2{
+  font-family: 'Fraunces', ui-serif, Georgia, serif !important;
+  letter-spacing: .01em;   /* som CV, inte versal smal rubrik */
+  font-size: clamp(34px, 5vw, 56px) !important;
+  margin-bottom: 8px !important;
+}
+#reach .social{
+  justify-content: flex-start !important;
+  margin-top: 12px !important;
+}
+
+/* 8) Extra: samma vertikala rytm mellan element i alla sektioner */
+#about .about > * + *,
+#cv .section > * + *,
+#projekt .case-wrap > * + *,
+#case .section > * + *,
+#reach .section > * + *{
+  margin-top: 8px;
+}
+
+/* 9) (Valfritt) Lite tajtare spacing mellan projektkorten så det matchar CV-känslan */
+#projekt .case-grid{ gap: clamp(14px, 2.2vw, 22px); }
+#projekt .case-card{ padding: clamp(14px, 2vw, 22px); }
+
+
   </style>
 </head>
 <body>
-    <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T33J7S8H"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-  <!-- Meny i vänstra hörnet -->
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T33J7S8H"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <!-- Meny -->
   <div class="menu-wrap">
     <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menuSheet">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
@@ -139,16 +391,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </div>
 
-  <!-- HOMEPAGE PANEL -->
+  <!-- HERO -->
   <header id="home" class="panel">
     <div class="hero">
       <div class="brand">
         <div class="logo">Elsa<br>von<br>Knorring</div>
         <div class="sub">Growth Marketing</div>
-        <!-- Reach out (hero) — endast uppdaterad här -->
         <a class="outline-btn" href="#reach" aria-label="Reach out" data-gtm-name="reach">Reach out</a>
       </div>
-      <!-- CV / Projekt / Case — endast uppdaterad här -->
+
       <div class="cta-stack" aria-label="Primär navigering">
         <a class="pill pill-cv" href="#cv" aria-label="Gå till CV" data-gtm-name="cv">CV</a>
         <a class="pill pill-projekt" href="#projekt" aria-label="Gå till projekt" data-gtm-name="projekt">Projekt</a>
@@ -157,11 +408,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </header>
 
-  <!-- ABOUT (ovanför CV, enligt screenshot) -->
+  <!-- ABOUT -->
   <section id="about" class="panel">
     <div class="about">
       <figure class="clip" aria-label="IMG_5453.jpg">
-        <!-- Lägg IMG_5453.jpg i samma mapp som html-filen -->
         <img src="IMG_5453.jpg" alt="" />
       </figure>
       <div>
@@ -180,111 +430,42 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </section>
 
- <!-- PROJEKT -->
-<section id="projekt" class="panel">
-  <!-- Endast denna sektion är ny. Allt annat i dokumentet är oförändrat. -->
-  <style>
-    /* ======= Stil för CASE/PROJEKT inom denna sektion ======= */
-    #projekt .case-wrap{ max-width: var(--maxw); margin: 0 auto; }
-    #projekt .case-wrap h2{ font-family: 'Fraunces', ui-serif, Georgia, serif; color: var(--accent); font-size: clamp(28px, 4vw, 48px); margin: 0 0 8px; }
-    #projekt .lead{ color: var(--muted); margin-bottom: 18px; }
+  <!-- PROJEKT -->
+  <section id="projekt" class="panel">
+    <div class="case-wrap">
+      <h2>Projekt</h2>
+      <p class="lead muted">Here is my cases throughout my year at Berghs</p>
 
-    /* Listlayout */
-    #projekt .case-grid{ display: grid; grid-template-columns: 1fr; gap: clamp(18px, 3vw, 28px); }
+      <div class="case-grid">
+        <article class="case-card" aria-labelledby="case1-title">
+          <div class="case-body">
+            <h3 class="case-title" id="case1-title">Google Toolbox</h3>
+            <p class="case-meta">Det här har jag lärt mig</p>
+            <p class="case-role">GA4 &amp; GTM</p>
+          </div>
+          <a class="case-action" href="#case">Se case</a>
+        </article>
 
-    /* Stora rundade kort med orange kant (inspirerat av din skiss) */
-    #projekt .case-card{
-      position: relative;
-      background: #fff;
-      border: 6px solid var(--accent);
-      border-radius: 30px;
-      padding: clamp(16px, 2.4vw, 28px);
-      min-height: 180px;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      align-items: center;
-      overflow: hidden;
-    }
+        <article class="case-card" aria-labelledby="case2-title">
+          <div class="case-body">
+            <h3 class="case-title" id="case2-title">Fotografiska Play</h3>
+            <p class="case-meta">Vi vill aktivera barn och besökare genom gamification som gör museiupplevelsen mer interaktiv och lekfull utan att kompromissa med konstens värde.</p>
+            <p class="case-role">Roll: Growth Marketer</p>
+          </div>
+          <a class="case-action" href="#case">Se case</a>
+        </article>
 
-    /* Den ljusare vänstersidan som i bilden */
-    #projekt .case-card::before{
-      content:"";
-      position:absolute; inset:0;
-      background:
-        linear-gradient(90deg, rgba(234,86,31,.06) 0%, rgba(234,86,31,.06) 35%, transparent 35%);
-      pointer-events:none;
-    }
-
-    /* Innehåll */
-    #projekt .case-body{ position: relative; z-index: 1; display:flex; gap:10px; flex-direction:column; }
-    #projekt .case-title{ font-weight: 700; font-size: clamp(18px, 2.2vw, 22px); margin:0; color: var(--ink); }
-    #projekt .case-meta{ margin: 2px 0 0; color: var(--muted); }
-    #projekt .case-role{ color: var(--muted); font-size: .95rem; }
-
-    /* Åtgärd (sekundär knapp) – återanvänder din outline-stil */
-    #projekt .case-action{
-      position: relative; z-index: 1;
-      text-decoration:none;
-      border: 2px solid var(--accent);
-      color: var(--accent);
-      background: transparent;
-      padding: 10px 16px;
-      border-radius: 999px;
-      font-weight: 600;
-      white-space: nowrap;
-      justify-self: end;
-      transition: transform .08s ease;
-    }
-    #projekt .case-action:hover{ transform: translateY(-1px); }
-
-    /* Responsiv: stacka innehåll */
-    @media (max-width: 860px){
-      #projekt .case-card{ grid-template-columns: 1fr; gap: 12px; }
-      #projekt .case-action{ justify-self: start; }
-      #projekt .case-card::before{
-        background: linear-gradient(180deg, rgba(234,86,31,.06) 0%, rgba(234,86,31,.06) 36%, transparent 36%);
-      }
-    }
-  </style>
-
-  <div class="case-wrap">
-    <h2>Projekt</h2>
-    <p class="lead">Here is my cases throughout my year at Berghs</p>
-
-    <div class="case-grid">
-      <!-- Case 1: Fotografiska Play -->
-      <article class="case-card" aria-labelledby="case1-title">
-        <div class="case-body">
-          <h3 class="case-title" id="case1-title">Google Toolbox</h3>
-          <p class="case-meta">Det här har jag lärt mig</p>
-          <p class="case-role">GA4 & GTM</p>
-        </div>
-        <a class="case-action" href="#case">Se case</a>
-      </article>
-
-      <!-- Case 2: PR & storytelling -->
-      <article class="case-card" aria-labelledby="case2-title">
-        <div class="case-body">
-          <h3 class="case-title" id="case2-title">Fotografiska Play</h3>
-          <p class="case-meta">Vi vill aktivera barn och besökare genom gamification som gör museiupplevelsen mer interaktiv och lekfull utan att kompromissa med konstens värde.</p>
-          <p class="case-role">Roll: Growth Marketer</p>
-        </div>
-        <a class="case-action" href="#case">Se case</a>
-      </article>
-
-      <!-- Case 3: Reflexvästar B2B -->
-      <article class="case-card" aria-labelledby="case3-title">
-        <div class="case-body">
-          <h3 class="case-title" id="case3-title">Reflexvästar — LinkedIn B2B</h3>
-          <p class="case-meta">Leadgenererande innehåll och ABM-inlägg mot finans branschen. Tydlig CTA &amp; mätning.</p>
-          <p class="case-role">Roll: Content &amp; Growth</p>
-        </div>
-        <a class="case-action" href="#case">Se case</a>
-      </article>
+        <article class="case-card" aria-labelledby="case3-title">
+          <div class="case-body">
+            <h3 class="case-title" id="case3-title">Reflexvästar — LinkedIn B2B</h3>
+            <p class="case-meta">Leadgenererande innehåll och ABM-inlägg mot finans branschen. Tydlig CTA &amp; mätning.</p>
+            <p class="case-role">Roll: Content &amp; Growth</p>
+          </div>
+          <a class="case-action" href="#case">Se case</a>
+        </article>
+      </div>
     </div>
-  </div>
-</section>
-
+  </section>
 
   <!-- CASE -->
   <section id="case" class="panel">
@@ -294,7 +475,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </section>
 
-  <!-- REACH OUT / Sociala medier -->
+  <!-- REACH OUT -->
   <section id="reach" class="panel">
     <div class="section">
       <h2>Reach out</h2>
@@ -343,6 +524,5 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       }
     });
   </script>
-  
 </body>
 </html>
