@@ -44,6 +44,34 @@
   </script>
   <!-- ===== End GTM ===== -->
 
+  <script>
+// Toolcard: konsekvent GTM-event oavsett var i kortet man klickar
+document.addEventListener('click', function(e){
+  const card = e.target.closest('.tool-card');
+  if(!card) return;
+  window.dataLayer.push({
+    event: 'tool_click',
+    tool_name: card.getAttribute('data-tool'),     // ga4 | gtm | looker | cli | scrape
+    tool_class: (card.className || '').trim()      // t.ex. "tool-card tool--ga4"
+  });
+});
+
+// Tangentbord (Enter/Space) aktiverar också klick
+document.addEventListener('keydown', function(e){
+  if(e.key !== 'Enter' && e.key !== ' ') return;
+  const card = e.target.closest('.tool-card[role="button"]');
+  if(!card) return;
+  e.preventDefault();
+  window.dataLayer.push({
+    event: 'tool_click',
+    tool_name: card.getAttribute('data-tool'),
+    tool_class: (card.className || '').trim(),
+    via: 'keyboard'
+  });
+});
+</script>
+
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -147,6 +175,9 @@
     .tool-kicker{color:var(--muted);font-size:.9rem}
     .tool-tags{margin-top:auto;display:flex;flex-wrap:wrap;gap:8px}
     .tag{border:1px solid var(--accent);color:var(--accent);border-radius:999px;padding:6px 10px;font-size:.78rem;letter-spacing:.04em}
+    /* Toolcards klick- och fokusstil (påverkar ingenting annat) */
+.tool-card { cursor: pointer; }
+.tool-card[role="button"]:focus-visible { outline: 3px solid #ffb79a; outline-offset: 2px; }
 
     /* COURSES – 4 piller */
     .courses{background:var(--panel)}
@@ -226,11 +257,11 @@
         <!-- TOM förhandsvisning (ingen bild) -->
         <div class="preview" aria-label="Förhandsvisning"></div>
 
-        <span class="case-arrow">Visa caset
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M7 12h10M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </span>
+        <span class="case-arrow" data-gtm-name="case">Visa caset
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <path d="M7 12h10M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+  </svg>
+</span>
       </a>
 
       <!-- Metriker under kortet -->
