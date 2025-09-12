@@ -14,6 +14,22 @@
       page_name: "Elsa von Knorring",
       page_language: "sv-SE"
     });
+    <script>
+  /* Hooka dataLayer.push så varje event loggas direkt i konsolen */
+  (function () {
+    var dl = window.dataLayer = window.dataLayer || [];
+    var _push = dl.push;
+    dl.push = function () {
+      try {
+        var evt = arguments[0] || {};
+        // Kompakt rad du kan expandera vid behov
+        console.log('dataLayer.push:', evt.event || '(no event)', evt);
+      } catch (e) {}
+      return _push.apply(dl, arguments);
+    };
+  })();
+
+
   </script>
 
   <!-- ===== Google Tag Manager ===== -->
@@ -74,6 +90,7 @@
     .about .stats{display:flex;gap:36px;color:var(--accent);font-size:22px;margin:0 0 10px;flex-wrap:wrap}
     .about ul{margin:10px 0 0 0;padding-left:18px;color:#4c4643}
     .about li{margin:6px 0}
+
 
     /* CASE – klickbar layout (preview tom) + metrics UNDER */
     .case{background:var(--panel)}
