@@ -4,33 +4,30 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Elsa von Knorring — Growth Marketing</title>
+<!-- ===== DATA LAYER + GTM (single script, correct order) ===== -->
+<script>
+(function () {
+  /* 1) Initiera dataLayer */
+  window.dataLayer = window.dataLayer || [];
 
-  <!-- ===== DATA LAYER ===== -->
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({
-      event: "page_view",
-      page_category: "portfolio",
-      page_name: "Elsa von Knorring",
-      page_language: "sv-SE"
-    });
-    <script>
-  /* Hooka dataLayer.push så varje event loggas direkt i konsolen */
-  (function () {
-    var dl = window.dataLayer = window.dataLayer || [];
-    var _push = dl.push;
-    dl.push = function () {
-      try {
-        var evt = arguments[0] || {};
-        // Kompakt rad du kan expandera vid behov
-        console.log('dataLayer.push:', evt.event || '(no event)', evt);
-      } catch (e) {}
-      return _push.apply(dl, arguments);
-    };
-  })();
+  /* 2) Hooka push för konsolloggning av ALLA events */
+  var _push = window.dataLayer.push;
+  window.dataLayer.push = function () {
+    try {
+      var evt = arguments[0] || {};
+      console.log('dataLayer.push →', evt.event || '(no event)', evt);
+    } catch (e) {}
+    return _push.apply(this, arguments);
+  };
 
+  /* 3) Första sidladdnings-event (loggas innan GTM laddas) */
+  window.dataLayer.push({
+    event: 'page_view',
+    page_category: 'portfolio',
+    page_name: 'Elsa von Knorring',
+    page_language: 'sv-SE'
+  });
 
-  </script>
 
   <!-- ===== Google Tag Manager ===== -->
   <script>
@@ -44,27 +41,29 @@
   </script>
   <!-- ===== End GTM ===== -->
 
-  <script>
+ <script>
 // Toolcard: konsekvent GTM-event oavsett var i kortet man klickar
 document.addEventListener('click', function(e){
   const card = e.target.closest('.tool-card');
   if(!card) return;
+  const name = card.getAttribute('data-gtm-name') || ''; // <- rätt attribut
   window.dataLayer.push({
     event: 'tool_click',
-    tool_name: card.getAttribute('data-tool'),     // ga4 | gtm | looker | cli | scrape
-    tool_class: (card.className || '').trim()      // t.ex. "tool-card tool--ga4"
+    tool_name: name,
+    tool_class: (card.className || '').trim()
   });
 });
 
 // Tangentbord (Enter/Space) aktiverar också klick
 document.addEventListener('keydown', function(e){
   if(e.key !== 'Enter' && e.key !== ' ') return;
-  const card = e.target.closest('.tool-card[role="button"]');
+  const card = e.target.closest('.tool-card');
   if(!card) return;
   e.preventDefault();
+  const name = card.getAttribute('data-gtm-name') || '';
   window.dataLayer.push({
     event: 'tool_click',
-    tool_name: card.getAttribute('data-tool'),
+    tool_name: name,
     tool_class: (card.className || '').trim(),
     via: 'keyboard'
   });
