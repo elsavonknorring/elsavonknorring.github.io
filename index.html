@@ -4,71 +4,43 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Elsa von Knorring — Growth Marketing</title>
-<!-- ===== DATA LAYER + GTM (single script, correct order) ===== -->
+<!-- ===== dataLayer init + console hook + first page_view (INNAN GTM) ===== -->
 <script>
-(function () {
-  /* 1) Initiera dataLayer */
+  // 1) Initiera dataLayer (global)
   window.dataLayer = window.dataLayer || [];
 
-  /* 2) Hooka push för konsolloggning av ALLA events */
-  var _push = window.dataLayer.push;
-  window.dataLayer.push = function () {
-    try {
-      var evt = arguments[0] || {};
-      console.log('dataLayer.push →', evt.event || '(no event)', evt);
-    } catch (e) {}
-    return _push.apply(this, arguments);
-  };
+  // 2) Hooka push för att logga alla events i konsolen
+  (function () {
+    var _push = window.dataLayer.push;
+    window.dataLayer.push = function () {
+      try {
+        var evt = arguments[0] || {};
+        console.log('dataLayer.push →', evt.event || '(no event)', evt);
+      } catch (e) {}
+      return _push.apply(window.dataLayer, arguments);
+    };
+  })();
 
-  /* 3) Första sidladdnings-event (loggas innan GTM laddas) */
+  // 3) Första sidladdning (loggas innan GTM laddas)
   window.dataLayer.push({
     event: 'page_view',
     page_category: 'portfolio',
     page_name: 'Elsa von Knorring',
     page_language: 'sv-SE'
   });
-
-
-  <!-- ===== Google Tag Manager ===== -->
-  <script>
-    (function(w,d,s,l,i){
-      w[l]=w[l]||[];
-      w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
-      var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&l='+l:'';
-      j.async=true; j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
-      f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-T33J7S8H');
-  </script>
-  <!-- ===== End GTM ===== -->
-
- <script>
-// Toolcard: konsekvent GTM-event oavsett var i kortet man klickar
-document.addEventListener('click', function(e){
-  const card = e.target.closest('.tool-card');
-  if(!card) return;
-  const name = card.getAttribute('data-gtm-name') || ''; // <- rätt attribut
-  window.dataLayer.push({
-    event: 'tool_click',
-    tool_name: name,
-    tool_class: (card.className || '').trim()
-  });
-});
-
-// Tangentbord (Enter/Space) aktiverar också klick
-document.addEventListener('keydown', function(e){
-  if(e.key !== 'Enter' && e.key !== ' ') return;
-  const card = e.target.closest('.tool-card');
-  if(!card) return;
-  e.preventDefault();
-  const name = card.getAttribute('data-gtm-name') || '';
-  window.dataLayer.push({
-    event: 'tool_click',
-    tool_name: name,
-    tool_class: (card.className || '').trim(),
-    via: 'keyboard'
-  });
-});
 </script>
+
+<!-- ===== Google Tag Manager (OFFICIELLT SNIPPET) ===== -->
+<script>
+  (function(w,d,s,l,i){
+    w[l]=w[l]||[];
+    w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
+    var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&l='+l:'';
+    j.async=true; j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+    f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-T33J7S8H');
+</script>
+<!-- ===== End Google Tag Manager ===== -->
 
 
   <!-- Fonts -->
@@ -407,5 +379,34 @@ document.addEventListener('keydown', function(e){
     }, {threshold:[0.5]});
     ids.map(s=>document.querySelector(s)).filter(Boolean).forEach(el=>io.observe(el));
   </script>
+  <script>
+// Toolcard: konsekvent GTM-event oavsett var i kortet man klickar
+document.addEventListener('click', function(e){
+  const card = e.target.closest('.tool-card');
+  if(!card) return;
+  const name = card.getAttribute('data-gtm-name') || '';
+  window.dataLayer.push({
+    event: 'tool_click',
+    tool_name: name,
+    tool_class: (card.className || '').trim()
+  });
+});
+
+// Tangentbord (Enter/Space) aktiverar också klick
+document.addEventListener('keydown', function(e){
+  if(e.key !== 'Enter' && e.key !== ' ') return;
+  const card = e.target.closest('.tool-card');
+  if(!card) return;
+  e.preventDefault();
+  const name = card.getAttribute('data-gtm-name') || '';
+  window.dataLayer.push({
+    event: 'tool_click',
+    tool_name: name,
+    tool_class: (card.className || '').trim(),
+    via: 'keyboard'
+  });
+});
+</script>
+
 </body>
 </html>
