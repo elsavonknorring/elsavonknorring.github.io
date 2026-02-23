@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "Weather Assistant",
+  "version": "1.0",
+  "description": "Väder + påminnelser 10 min innan du går hemifrån.",
+  "permissions": [
+    "notifications",
+    "alarms",
+    "storage"
+  ],
+  "host_permissions": [
+    "http://localhost:3000/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  }
+}

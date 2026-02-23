@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Weather Assistant</title>
+  <style>
+    body{
+      width: 340px;
+      margin: 0;
+      padding: 14px;
+      background: #f4f4f4;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+    }
+    .card{
+      background: #fff;
+      border-radius: 18px;
+      padding: 14px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    }
+    .city{
+      text-align:center;
+      letter-spacing: 3px;
+      font-size: 12px;
+      margin: 4px 0 8px;
+      color:#111;
+    }
+    .desc{
+      text-align:center;
+      letter-spacing: 4px;
+      font-size: 12px;
+      color:#333;
+      margin-bottom: 10px;
+    }
+    .top{
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .temp{
+      font-size: 46px;
+      font-weight: 300;
+      line-height: 1;
+    }
+    .mini{
+      font-size: 12px;
+      color:#333;
+      line-height: 1.5;
+      text-align:right;
+      min-width: 130px;
+    }
+    .row{
+      display:flex;
+      justify-content: space-between;
+      font-size: 12px;
+      margin-top: 10px;
+      gap: 10px;
+    }
+    .panel{
+      background:#fafafa;
+      border-radius: 14px;
+      padding: 10px;
+      margin-top: 10px;
+      font-size: 12px;
+    }
+    .panel strong{ display:block; margin-bottom: 6px; }
+    input[type="time"]{
+      width: 100%;
+      padding: 8px;
+      border-radius: 10px;
+      border:1px solid #ddd;
+      margin-top: 6px;
+      font-size: 12px;
+      background:#fff;
+    }
+    .actions{
+      display:flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    button{
+      flex:1;
+      border:0;
+      border-radius: 12px;
+      padding: 10px;
+      cursor:pointer;
+      font-size: 12px;
+    }
+    .primary{ background:#111; color:#fff; }
+    .ghost{ background:#eee; color:#111; }
+    .hint{ color:#777; font-size: 11px; margin-top: 6px; }
+    .hourly{
+      display:flex;
+      gap: 10px;
+      overflow-x:auto;
+      padding-top: 10px;
+    }
+    .hour{
+      min-width: 56px;
+      text-align:center;
+      font-size: 11px;
+      color:#222;
+    }
+    .hour img{ width: 28px; height: 28px; }
+    .status{ margin-top: 8px; font-size: 11px; color:#444; }
+    .median{
+  font-size: 11px;
+  color: #666;
+  letter-spacing: 2px;
+  margin-top: 6px;
+}
+
+.badge{
+  display:inline-block;
+  padding: 8px 10px;
+  border-radius: 14px;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  background: #eee;
+  color: #111;
+}
+
+/* TEMAN beroende på temperatur */
+body.cold { background: #eef5ff; }
+body.cold .card { box-shadow: 0 10px 25px rgba(0,60,120,0.10); }
+body.cold .badge { background:#dcecff; color:#124b9a; }
+
+body.mild { background: #f4f4f4; }
+body.mild .badge { background:#e8f7ee; color:#116b3a; }
+
+body.warm { background: #fff3e9; }
+body.warm .card { box-shadow: 0 10px 25px rgba(120,60,0,0.10); }
+body.warm .badge { background:#ffe5cf; color:#8a3a00; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="city">STOCKHOLM</div>
+    <div class="desc" id="desc">--</div>
+
+   <div class="top">
+  <div>
+    <div class="temp" id="temp">--</div>
+    <div class="median" id="medianLabel">DAY MEDIAN: --</div>
+  </div>
+
+  <div class="mini">
+    <div class="badge" id="tempBadge">--</div>
+    Feels like: <span id="feels">--</span><br/>
+    Wind: <span id="wind">--</span><br/>
+    Humidity: <span id="humidity">--</span><br/>
+    Sunrise: <span id="sunrise">--</span> / Sunset: <span id="sunset">--</span>
+  </div>
+</div>
+
+    <div class="hourly" id="hourly"></div>
+
+    <div class="panel">
+      <strong>Bästa kläderna för idag</strong>
+      <div id="clothing">--</div>
+    </div>
+
+    <div class="panel">
+      <strong>När brukar du gå ut?</strong>
+      <input type="time" id="leaveTime"/>
+      <div class="actions">
+        <button class="primary" id="saveBtn">Spara & aktivera</button>
+        <button class="ghost" id="testBtn">Test-notis</button>
+      </div>
+      <div class="hint">Notis skickas 10 min innan om regn (paraply) eller sol (solglasögon).</div>
+      <div class="status" id="status"></div>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

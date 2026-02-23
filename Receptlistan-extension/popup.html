@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Receptlistan</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      width: 300px;
+      background: #f7f7f9;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #1a1a1a;
+    }
+    .header {
+      background: #1a1a2e;
+      color: #fff;
+      padding: 16px 18px;
+      font-size: 16px;
+      font-weight: 700;
+    }
+    .header span {
+      font-size: 11px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.55);
+      display: block;
+      margin-top: 2px;
+    }
+    .body { padding: 14px; }
+    .list-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: #888;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .shopping-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 14px;
+      max-height: 280px;
+      overflow-y: auto;
+    }
+    .shopping-list li {
+      background: #fff;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 13px;
+      border-left: 3px solid #1a1a2e;
+      line-height: 1.4;
+    }
+    .saved-at {
+      font-size: 11px;
+      color: #aaa;
+      margin-bottom: 12px;
+    }
+    .actions { display: flex; gap: 8px; }
+    button {
+      flex: 1;
+      padding: 9px;
+      border: none;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .btn-primary { background: #1a1a2e; color: #fff; }
+    .btn-primary:hover { background: #2d2d50; }
+    .btn-ghost { background: #ebebeb; color: #555; }
+    .btn-ghost:hover { background: #ddd; }
+    .empty {
+      text-align: center;
+      padding: 24px 14px;
+      color: #888;
+    }
+    .empty .emoji { font-size: 36px; margin-bottom: 10px; }
+    .empty p { font-size: 13px; line-height: 1.6; }
+    .empty a { color: #1a1a2e; font-weight: 600; text-decoration: none; }
+    .shopping-list::-webkit-scrollbar { width: 4px; }
+    .shopping-list::-webkit-scrollbar-thumb { background: #ddd; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    🛒 Receptlistan
+    <span>Din sparade inköpslista</span>
+  </div>
+  <div class="body" id="content">
+    <div class="empty">
+      <div class="emoji">⏳</div>
+      <p>Laddar…</p>
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
