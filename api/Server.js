@@ -54,5 +54,9 @@ function renderIcon(weatherMain) {
     container.innerHTML = '<div class="cloud" style="position:relative;margin:0 auto;"></div>';
   }
 }
+// ... din gamla kod med den andra API-nyckeln ...
 
-
+// DIN GAMLA ROUTE (för det andra projektet)
+app.post('/din-gamla-route', async (req, res) => { 
+    // ...
+});
