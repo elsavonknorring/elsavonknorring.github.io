@@ -7,8 +7,8 @@ node_modules/
 package-lock.json
 
 # Server files with API keys
-**/server.js
-Seconhand-extension/
+Seconhand-extension/server.js
+Seconhand-extension/node_modules/
 
 # Mac files
 .DS_Store
