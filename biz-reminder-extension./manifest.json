@@ -1,20 +1,19 @@
 {
   "manifest_version": 3,
-  "name": "Weather Assistant",
+  "name": "Second Hand Scout AI",
   "version": "1.0",
-  "description": "Väder + påminnelser 10 min innan du går hemifrån.",
-  "permissions": [
-    "notifications",
-    "alarms",
-    "storage"
-  ],
-  "host_permissions": [
-    "http://localhost:3000/*"
-  ],
+  "permissions": ["activeTab", "scripting", "storage"],
+  "host_permissions": ["https://api.groq.com/*"],
+  "action": {
+    "default_popup": "popup.html"
+  },
   "background": {
     "service_worker": "background.js"
   },
-  "action": {
-    "default_popup": "popup.html"
-  }
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ]
 }

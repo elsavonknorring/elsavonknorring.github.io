@@ -1,0 +1,19 @@
+# Environment variables
+.env
+*.env
+
+# Node modules
+node_modules/
+package-lock.json
+
+# Server files with API keys
+**/server.js
+Seconhand-extension/
+
+# Mac files
+.DS_Store
+
+# Old extensions
+Receptlistan-extension/
+biz-reminder-extension./
+

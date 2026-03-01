@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vädret i Stockholm</title>
+<style>
+/* ... (Här behåller du exakt samma CSS som du skickade tidigare) ... */
+body { margin: 0; background: #f4f4f4; font-family: "Helvetica Neue", Arial, sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+.card { background: white; width: 420px; border-radius: 40px; padding: 40px; box-shadow: 0 30px 60px rgba(0,0,0,0.15); position: relative; overflow: hidden; }
+.city { text-align: center; letter-spacing: 4px; font-size: 14px; margin-bottom: 30px; }
+.weather-type { text-align: center; letter-spacing: 6px; font-size: 18px; margin-bottom: 30px; }
+.sky { position: relative; height: 220px; margin-bottom: 20px; }
+.sun-path { position: absolute; bottom: 20px; left: 0; width: 100%; height: 120px; border-top: 2px solid #ddd; border-radius: 50% 50% 0 0; }
+.sun, .moon { width: 40px; height: 40px; border-radius: 50%; position: absolute; bottom: 110px; transition: left 1s ease; }
+.sun { background: #FFD400; }
+.moon { background: #f0f0f0; box-shadow: inset -8px 0 0 #ddd; }
+.cloud { position: absolute; width: 120px; height: 50px; background: #ddd; border-radius: 50px; top: 80px; }
+.cloud::before { content: ""; position: absolute; width: 70px; height: 70px; background: #ddd; border-radius: 50%; top: -35px; left: 20px; }
+.temp { font-size: 80px; font-weight: 200; margin-top: 20px; }
+.details { margin-top: 30px; }
+.details-title { font-size: 12px; letter-spacing: 2px; color: #777; margin-bottom: 10px; }
+.details-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 20px; font-size: 13px; }
+.details-grid div { display: flex; justify-content: space-between; }
+.divider { height: 1px; background: #ddd; margin: 25px 0; }
+.hourly { display: flex; overflow-x: auto; gap: 15px; padding-bottom: 10px; }
+.hour { min-width: 70px; text-align: center; font-size: 12px; }
+.hour img { width: 35px; }
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <div class="city">STOCKHOLM</div>
+  <div class="weather-type" id="desc">HÄMTAR...</div>
+
+  <div class="sky" id="sky">
+    <div class="sun-path"></div>
+  </div>
+
+  <div class="temp" id="temp">--</div>
+
+  <div class="details">
+    <div class="details-title">DETALJER</div>
+    <div class="details-grid">
+      <div><span>KÄNNS SOM</span><span id="feels">--</span></div>
+      <div><span>LUFTFUKT.</span><span id="humidity">--</span></div>
+      <div><span>VIND</span><span id="wind">--</span></div>
+      <div><span>SOLUPPG.</span><span id="sunrise">--</span></div>
+      <div><span>SOLNEDG.</span><span id="sunset">--</span></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+  <div class="hourly" id="hourly"></div>
+</div>
+
+<script>
+// 1. DIN NYCKEL (VIKTIGT!)
+const API_KEY = "44ec43679c6dc3f3ce6a358ef0ac0640"; 
+const lat = 59.3293;
+const lon = 18.0686;
+
+async function loadWeather() {
+  // Här hämtas både nuvarande väder och 3-timmars-prognosen
+  const currentUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&lang=sv&appid=${API_KEY}`;
+  const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&lang=sv&appid=${API_KEY}`;
+
+  try {
+    const [currentRes, forecastRes] = await Promise.all([
+      fetch(currentUrl),
+      fetch(forecastUrl)
+    ]);
+
+    const current = await currentRes.json();
+    const forecastData = await forecastRes.json();
+
+    if (current.cod !== 200) throw new Error(current.message);
+
+    // Uppdatera texter
+    document.getElementById("temp").textContent = Math.round(current.main.temp) + "°";
+    document.getElementById("desc").textContent = current.weather[0].description.toUpperCase();
+    document.getElementById("feels").textContent = Math.round(current.main.feels_like) + "°";
+    document.getElementById("wind").textContent = current.wind.speed + " m/s";
+    document.getElementById("humidity").textContent = current.main.humidity + "%";
+
+    // Soltider
+    const sunrise = new Date(current.sys.sunrise * 1000);
+    const sunset = new Date(current.sys.sunset * 1000);
+    document.getElementById("sunrise").textContent = sunrise.toLocaleTimeString("sv-SE", {hour:"2-digit",minute:"2-digit"});
+    document.getElementById("sunset").textContent = sunset.toLocaleTimeString("sv-SE", {hour:"2-digit",minute:"2-digit"});
+
+    // Kör rit-funktionerna
+    renderSky(current);
+    renderHourly(forecastData.list); // forecastData.list innehåller 3-timmars-stegen
+
+  } catch (e) {
+    console.error("Väderfel:", e);
+    document.getElementById("desc").textContent = "API-FEL";
+  }
+}
+
+function renderSky(current) {
+  const sky = document.getElementById("sky");
+  // Rensa gamla element för att inte rita dubbelt
+  const old = sky.querySelectorAll(".sun, .moon, .cloud");
+  old.forEach(el => el.remove());
+
+  const now = Date.now() / 1000;
+  const sunrise = current.sys.sunrise;
+  const sunset = current.sys.sunset;
+  const isDay = now > sunrise && now < sunset;
+
+  let celestial = document.createElement("div");
+  celestial.className = isDay ? "sun" : "moon";
+  sky.appendChild(celestial);
+
+  const totalDay = sunset - sunrise;
+  const progress = (now - sunrise) / totalDay;
+  const clamped = Math.max(0, Math.min(1, progress));
+  celestial.style.left = (clamped * 85) + "%";
+
+  if (current.weather[0].main === "Clouds" || current.weather[0].main === "Rain") {
+    const cloud = document.createElement("div");
+    cloud.className = "cloud";
+    cloud.style.left = "140px";
+    sky.appendChild(cloud);
+  }
+}
+
+function renderHourly(list) {
+  const hourlyContainer = document.getElementById("hourly");
+  hourlyContainer.innerHTML = "";
+
+  // Eftersom API:et ger var 3:e timme, visar vi de 8 första (totalt 24 timmar)
+  list.slice(0, 8).forEach(item => {
+    const div = document.createElement("div");
+    div.className = "hour";
+    const time = new Date(item.dt * 1000);
+    const hourString = time.getHours().toString().padStart(2, '0') + ":00";
+
+    div.innerHTML = `
+      <div>${hourString}</div>
+      <img src="https://openweathermap.org/img/wn/${item.weather[0].icon}.png">
+      <div>${Math.round(item.main.temp)}°</div>
+    `;
+    hourlyContainer.appendChild(div);
+  });
+}
+
+loadWeather();
+</script>
+<script>
+  function toggleWeather() {
+    const popup = document.getElementById('weather-popup');
+    if (popup.style.display === 'none' || popup.style.display === '') {
+      popup.style.display = 'flex';
+    } else {
+      popup.style.display = 'none';
+    }
+  }
+</script>
+</body>
+</html>

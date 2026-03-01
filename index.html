@@ -42,10 +42,6 @@
 </script>
 <!-- ===== End Google Tag Manager ===== -->
 
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Growth Marketing</title>
-
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -192,71 +188,104 @@
 
     .work-list {
       list-style: none;
-      border-top: 1px solid rgba(255,255,255,0.15);
+      display: flex;
+      gap: 24px;
+      margin-top: 32px;
+      overflow-x: auto;
+      padding-bottom: 20px;
+      scroll-behavior: smooth;
+    }
+
+    .work-list::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .work-list::-webkit-scrollbar-track {
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px;
+    }
+
+    .work-list::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.2);
+      border-radius: 10px;
+    }
+
+    .work-list::-webkit-scrollbar-thumb:hover {
+      background: rgba(255,255,255,0.3);
+    }
+
+    .work-list li {
+      flex: 0 0 auto;
     }
 
     .work-item {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 20px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.15);
-      cursor: pointer;
+      flex-direction: column;
       text-decoration: none;
       color: var(--white);
-      transition: background 0.2s;
+      background: rgba(255,255,255,0.02);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      width: 480px;
+      border: 1px solid rgba(255,255,255,0.1);
     }
 
-    .work-item:hover { background: rgba(255,255,255,0.03); }
+    .work-item:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.3);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    }
 
-    .work-item-left {
+    .work-item-header {
       display: flex;
-      align-items: baseline;
-      gap: 12px;
-    }
-
-    .work-number {
-      font-family: var(--nav-font);
-      font-size: 11px;
-      font-weight: 400;
-      letter-spacing: 0.1em;
-      opacity: 0.5;
-      position: relative;
-      top: -6px;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 24px;
     }
 
     .work-title {
-      font-family: var(--display-font);
-      font-size: clamp(36px, 6vw, 60px);
-      letter-spacing: 0.04em;
+      font-family: var(--nav-font);
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
       line-height: 1;
     }
 
-    .work-item-right {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      flex-shrink: 0;
-    }
-
-    .work-thumb {
-      width: 70px;
-      height: 52px;
-      object-fit: cover;
-      border-radius: 2px;
-    }
-
     .work-arrow {
-      font-size: 22px;
+      font-size: 20px;
       color: var(--white);
       transform: rotate(45deg);
       display: inline-block;
       line-height: 1;
       transition: transform 0.25s ease;
+      opacity: 0.6;
     }
 
-    .work-item:hover .work-arrow { transform: rotate(45deg) scale(1.2); }
+    .work-item:hover .work-arrow {
+      transform: rotate(45deg) translate(3px, -3px);
+      opacity: 1;
+    }
+
+    .work-image-wrapper {
+      width: 100%;
+      height: 320px;
+      overflow: hidden;
+    }
+
+    .work-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .work-item:hover .work-image {
+      transform: scale(1.08);
+    }
 
     section.toolbox { padding: 60px 40px 80px; }
 
@@ -285,6 +314,183 @@
       border-color: var(--white);
       color: var(--white);
       background: rgba(255,255,255,0.05);
+    }
+
+    /* ===== LEAD MAGNET SECTION ===== */
+    section.lead-magnet {
+      padding: 100px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .lead-magnet-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      opacity: 0;
+      transform: translateY(60px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .lead-magnet-container.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .lead-magnet-image {
+      position: relative;
+    }
+
+    .pdf-mockup {
+      width: 100%;
+      max-width: 400px;
+      aspect-ratio: 1/1.414;
+      background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.1);
+      transform-style: preserve-3d;
+      transition: transform 0.6s ease;
+    }
+
+    .lead-magnet-image:hover .pdf-mockup {
+      transform: rotateY(5deg) rotateX(-5deg);
+    }
+
+    .pdf-mockup img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+
+    .pdf-glow {
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+      animation: glow-pulse 4s ease-in-out infinite;
+    }
+
+    @keyframes glow-pulse {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.1); }
+    }
+
+    .lead-magnet-content {
+      opacity: 0;
+      transform: translateX(40px);
+      transition: opacity 1s ease 0.3s, transform 1s ease 0.3s;
+    }
+
+    .lead-magnet-container.visible .lead-magnet-content {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .lead-magnet-badge {
+      display: inline-block;
+      font-family: var(--nav-font);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--white);
+      background: rgba(255,255,255,0.1);
+      padding: 8px 16px;
+      border-radius: 20px;
+      margin-bottom: 24px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .lead-magnet-heading {
+      font-family: var(--display-font);
+      font-size: clamp(36px, 5vw, 56px);
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      background: linear-gradient(135deg, #ffffff 0%, rgba(255,255,255,0.7) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .lead-magnet-description {
+      font-family: var(--nav-font);
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 32px;
+      max-width: 500px;
+    }
+
+    .lead-magnet-features {
+      list-style: none;
+      margin-bottom: 40px;
+    }
+
+    .lead-magnet-features li {
+      font-family: var(--nav-font);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      color: rgba(255,255,255,0.7);
+      padding: 12px 0;
+      padding-left: 32px;
+      position: relative;
+    }
+
+    .lead-magnet-features li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--white);
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    .lead-magnet-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 18px 40px;
+      background: var(--white);
+      color: var(--black);
+      font-family: var(--nav-font);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(255,255,255,0.2);
+    }
+
+    .lead-magnet-cta:hover {
+      background: rgba(255,255,255,0.9);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(255,255,255,0.3);
+    }
+
+    .lead-magnet-cta::after {
+      content: '→';
+      font-size: 16px;
+      transition: transform 0.3s ease;
+    }
+
+    .lead-magnet-cta:hover::after {
+      transform: translateX(4px);
     }
 
     section.contact {
@@ -365,12 +571,150 @@
 
     .footer-social-link:hover { color: var(--white); }
 
+    @media (max-width: 968px) {
+      .lead-magnet-container {
+        grid-template-columns: 1fr;
+        gap: 60px;
+        text-align: center;
+      }
+
+      .pdf-mockup {
+        margin: 0 auto;
+      }
+
+      .lead-magnet-description,
+      .lead-magnet-features {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .lead-magnet-features li {
+        text-align: left;
+      }
+    }
+
     @media (max-width: 640px) {
       nav { gap: 20px; padding: 18px 20px; flex-wrap: wrap; }
-      section.work, section.toolbox, section.contact { padding-left: 20px; padding-right: 20px; }
-      .work-title { font-size: 32px; }
+      section.work, section.toolbox, section.contact, section.lead-magnet { padding-left: 20px; padding-right: 20px; }
+      .work-item { width: 340px; }
+      .work-image-wrapper { height: 240px; }
+      .work-title { font-size: 14px; }
       footer { flex-direction: column; gap: 12px; text-align: center; }
+      .lead-magnet-container { gap: 40px; }
     }
+    /* ===== MODAL STYLES ===== */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.9);
+  display: none; /* Dold som standard */
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+}
+
+.modal-content {
+  background: #111;
+  padding: 40px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 450px;
+  border: 1px solid rgba(255,255,255,0.1);
+  text-align: center;
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: 15px; right: 20px;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.modal-close:hover { opacity: 1; }
+
+.modal-input {
+  width: 100%;
+  padding: 14px;
+  margin: 20px 0;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: white;
+  font-family: var(--nav-font);
+  border-radius: 4px;
+}
+
+.modal-submit {
+  width: 100%;
+  padding: 14px;
+  background: white;
+  color: black;
+  border: none;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+/* --- VÄDER-KNAPP OCH POPUP --- */
+#weather-launcher {
+  position: fixed !important;
+  top: 20px !important;    /* Avstånd från absoluta toppen */
+  right: 20px !important;   /* Avstånd från högerkanten */
+  bottom: auto !important;
+  left: auto !important;
+  width: 55px !important;
+  height: 55px !important;
+  background: white !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  z-index: 999999 !important; /* Ligger ovanför ALLT annat */
+  box-shadow: 0 5px 20px rgba(0,0,0,0.4) !important;
+  font-size: 28px !important;
+  transition: transform 0.3s ease !important;
+}
+
+#weather-launcher:hover { transform: scale(1.1) rotate(10deg) !important; }
+
+#weather-popup {
+  position: fixed !important;
+  top: 85px !important;     /* Hamnar precis under knappen */
+  right: 20px !important;
+  width: 380px !important;
+  height: 580px !important;
+  z-index: 999998 !important;
+  display: none;            /* Kontrolleras av klicket */
+  flex-direction: column !important;
+  background: #111 !important;
+  border-radius: 20px !important;
+  overflow: hidden !important;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5) !important;
+}
+
+.weather-header {
+  background: #1a1a1a !important;
+  color: white !important;
+  padding: 12px 20px !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+}
+
+.weather-header button { background: none; border: none; color: white; font-size: 24px; cursor: pointer; }
+
+#weather-iframe {
+  width: 100% !important;
+  height: 100% !important;
+  border: none !important;
+}
   </style>
 </head>
 <body>
@@ -380,14 +724,26 @@
   <!-- ===== End GTM (noscript) ===== -->
 
   <nav>
-  <a href="#" class="nav-logo" data-gtm-name="nav_logo">Growth Marketing</a>
-  <a href="#work" class="nav-link" data-gtm-name="nav_case">Cases</a>
-  <a href="#toolbox" class="nav-link" data-gtm-name="nav_toolbox">Toolbox</a>
-  <a href="#contact" class="nav-link" data-gtm-name="nav_contact">Kontakt</a>
+    <a href="#" class="nav-logo" data-gtm-name="nav_logo">Growth Marketing</a>
+    <a href="#work" class="nav-link" data-gtm-name="nav_case">Cases</a>
+    <a href="#toolbox" class="nav-link" data-gtm-name="nav_toolbox">Toolbox</a>
+    <a href="#contact" class="nav-link" data-gtm-name="nav_contact">Kontakt</a>
+  </nav>
+
+  <div id="weather-launcher" onclick="toggleWeather()">
+    <span id="launcher-icon">🌤️</span>
+  </div>
 </nav>
 
-  <section class="hero">
+<div id="weather-popup">
+  <div class="weather-header">
+    <span>STOCKHOLM WEATHER</span>
+    <button onclick="toggleWeather()">&times;</button>
+  </div>
+  <iframe src="api/väder.html" id="weather-iframe"></iframe>
+</div>
 
+  <section class="hero">
     <div class="hero-image-wrapper" style="margin-top: 20px;">
       <img src="images/hero.png" alt="Hero" />
     </div>
@@ -442,7 +798,6 @@
         <span>WORK WITH ME</span><span class="sep">/</span>
       </div>
     </div>
-
   </section>
 
   <section class="work" id="work">
@@ -450,37 +805,34 @@
     <ul class="work-list">
       <li>
         <a href="#" class="work-item btn-case-conversion" data-gtm-name="case_conversion_click">
-          <div class="work-item-left">
-            <sup class="work-number">01</sup>
-            <span class="work-title">Conversion</span>
-          </div>
-          <div class="work-item-right">
-            <img src="images/thumb-conversion.png" class="work-thumb" alt="Conversion" />
+          <div class="work-item-header">
+            <span class="work-title">CONVERSION</span>
             <span class="work-arrow">↗</span>
+          </div>
+          <div class="work-image-wrapper">
+            <img src="images/thumb-conversion.png" class="work-image" alt="Conversion" />
           </div>
         </a>
       </li>
       <li>
         <a href="#" class="work-item btn-case-ecommerce" data-gtm-name="case_ecommerce_click">
-          <div class="work-item-left">
-            <sup class="work-number">02</sup>
-            <span class="work-title">E-Commerce</span>
-          </div>
-          <div class="work-item-right">
-            <img src="images/thumb-suie.png" class="work-thumb" alt="E-Commerce" />
+          <div class="work-item-header">
+            <span class="work-title">E-COMMERCE</span>
             <span class="work-arrow">↗</span>
+          </div>
+          <div class="work-image-wrapper">
+            <img src="images/thumb-suie.png" class="work-image" alt="E-Commerce" />
           </div>
         </a>
       </li>
       <li>
         <a href="#" class="work-item btn-case-project" data-gtm-name="case_project_click">
-          <div class="work-item-left">
-            <sup class="work-number">03</sup>
-            <span class="work-title">Project</span>
-          </div>
-          <div class="work-item-right">
-            <img src="images/thumb-project.png" class="work-thumb" alt="Project" />
+          <div class="work-item-header">
+            <span class="work-title">PROJECT</span>
             <span class="work-arrow">↗</span>
+          </div>
+          <div class="work-image-wrapper">
+            <img src="images/thumb-project.png" class="work-image" alt="Project" />
           </div>
         </a>
       </li>
@@ -490,25 +842,65 @@
   <section class="toolbox" id="toolbox">
     <h2 class="section-label">Toolbox</h2>
     <div class="toolbox-grid">
-      <div class="tool-tag btn-tool-meta" data-event="tool_meta_click">Meta Ads</div>
-      <div class="tool-tag btn-tool-google" data-event="tool_google_click">Google Ads</div>
-      <div class="tool-tag btn-tool-tiktok" data-event="tool_tiktok_click">TikTok Ads</div>
-      <div class="tool-tag btn-tool-klaviyo" data-event="tool_klaviyo_click">Klaviyo</div>
-      <div class="tool-tag btn-tool-ga4" data-event="tool_ga4_click">GA4</div>
-      <div class="tool-tag btn-tool-gtm" data-event="tool_gtm_click">GTM</div>
-      <div class="tool-tag btn-tool-hotjar" data-event="tool_hotjar_click">Hotjar</div>
-      <div class="tool-tag btn-tool-shopify" data-event="tool_shopify_click">Shopify</div>
-      <div class="tool-tag btn-tool-figma" data-event="tool_figma_click">Figma</div>
-      <div class="tool-tag btn-tool-notion" data-event="tool_notion_click">Notion</div>
-      <div class="tool-tag btn-tool-hubspot" data-event="tool_hubspot_click">HubSpot</div>
-      <div class="tool-tag btn-tool-semrush" data-event="tool_semrush_click">SEMrush</div>
+      <div class="tool-tag btn-tool" data-event="tool_meta_click">Meta Ads</div>
+      <div class="tool-tag btn-tool" data-event="tool_google_click">Google Ads</div>
+      <div class="tool-tag btn-tool" data-event="tool_tiktok_click">TikTok Ads</div>
+      <div class="tool-tag btn-tool" data-event="tool_klaviyo_click">Klaviyo</div>
+      <div class="tool-tag btn-tool" data-event="tool_ga4_click">GA4</div>
+      <div class="tool-tag btn-tool" data-event="tool_gtm_click">GTM</div>
+      <div class="tool-tag btn-tool" data-event="tool_hotjar_click">Hotjar</div>
+      <div class="tool-tag btn-tool" data-event="tool_shopify_click">Shopify</div>
+      <div class="tool-tag btn-tool" data-event="tool_figma_click">Figma</div>
+      <div class="tool-tag btn-tool" data-event="tool_notion_click">Notion</div>
+      <div class="tool-tag btn-tool" data-event="tool_hubspot_click">HubSpot</div>
+      <div class="tool-tag btn-tool" data-event="tool_semrush_click">SEMrush</div>
     </div>
   </section>
 
+  <!-- ===== LEAD MAGNET SECTION ===== -->
+  <section class="lead-magnet" id="report">
+    <div class="lead-magnet-container">
+      <div class="lead-magnet-image">
+        <div class="pdf-glow"></div>
+        <div class="pdf-mockup">
+          <img src="images/report-cover.png" alt="E-commerce & CRM Rapport 2026" />
+        </div>
+      </div>
+
+      <div class="lead-magnet-content">
+        <span class="lead-magnet-badge">Free Report</span>
+        <h2 class="lead-magnet-heading">E-commerce &<br>CRM Rapport 2026</h2>
+        <p class="lead-magnet-description">
+          Are you a mid/premium range fashion brand and want to elevate your business? Get the inside scoop on why you as an e-commerce business should use loyalty programs, personalization and up your game for your CRM.
+        </p>
+        
+        <ul class="lead-magnet-features">
+          <li>Loyalty program strategies for fashion brands</li>
+          <li>Advanced CRM personalization techniques</li>
+          <li>Data-driven customer retention methods</li>
+          <li>Real case studies from premium brands</li>
+        </ul>
+
+       <a href="javascript:void(0)" id="open-lead-modal" class="lead-magnet-cta btn-download-report" data-event="open_report_modal">
+  Download Report
+
+        </a>
+      </div>
+   <div class="modal-overlay" id="email-modal">
+  <div class="modal-content">
+    <span class="modal-close" id="close-modal">&times;</span>
+    <h3 class="section-label" style="font-size: 24px; margin-bottom: 10px;">Get the Report</h3>
+    <form id="lead-form">
+      <input type="email" id="lead-email" class="modal-input" placeholder="din.mail@foretag.se" required>
+      <button type="submit" class="modal-submit">Hämta rapporten</button>
+    </form>
+  </div>
+</div>
+
   <section class="contact" id="contact">
     <h2 class="contact-heading">Let's<br>Work</h2>
-    <a href="mailto:din@email.com" class="contact-email btn-contact-email" data-event="contact_email_click">din@email.com</a>
-    <a href="mailto:din@email.com" class="cta-btn btn-cta-kontakt" data-event="cta_kontakt_click">Ta kontakt</a>
+    <a href="mailto:elsa.von.knorring@student.berghs.se" class="contact-email btn-contact-email" data-event="contact_email_click">elsa.von.knorring@student.berghs.se</a>
+    <a href="mailto:elsa.von.knorring@student.berghs.se" class="cta-btn btn-cta-kontakt" data-event="cta_kontakt_click">Ta kontakt</a>
   </section>
 
   <footer>
@@ -520,12 +912,15 @@
   </footer>
 
   <script>
-    // Event tracking — byt ut console.log mot din analytics:
-    // GA4:     gtag('event', eventName, { element_class: element.className });
-    // Segment: analytics.track(eventName, { element_class: element.className });
+    // Event tracking
     function trackEvent(eventName, element) {
       console.log('[Track]', eventName, element);
+      window.dataLayer.push({
+        'event': 'toolbox_click',
+        'button_id': eventName
+      });
     }
+    
     document.querySelectorAll('[data-event]').forEach(el => {
       el.addEventListener('click', function() {
         trackEvent(this.dataset.event, this);
@@ -533,32 +928,119 @@
     });
   </script>
   
+  <script>
+    document.addEventListener('click', function(e) {
+      const el = e.target.closest('[data-gtm-name]');
+      if (el) {
+        const name = el.getAttribute('data-gtm-name');
+        window.dataLayer.push({
+          'event': 'nav_click',
+          'nav_name': name,
+          'gtm_name_val': name
+        });
+      }
+    });
+  </script>
+
+  <script>
+    document.querySelectorAll('[data-event]').forEach(button => {
+      button.addEventListener('click', function() {
+        var toolName = this.getAttribute('data-event');
+        window.dataLayer.push({
+          'event': 'toolbox_click',
+          'tool_value': toolName
+        });
+        console.log('Skickat till GTM:', toolName);
+      });
+    });
+  </script>
+
+  <!-- ===== SCROLL ANIMATION SCRIPT ===== -->
+  <script>
+    // Intersection Observer för scroll-animationer
+    const observerOptions = {
+      threshold: 0.2,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    // Observera lead magnet-sektionen
+    const leadMagnetContainer = document.querySelector('.lead-magnet-container');
+    if (leadMagnetContainer) {
+      observer.observe(leadMagnetContainer);
+    }
+  </script>
 <script>
-document.addEventListener('click', function(e) {
-  // Kolla om vi klickade på något som har data-gtm-name
-  const el = e.target.closest('[data-gtm-name]');
-  
-  if (el) {
-    const name = el.getAttribute('data-gtm-name');
-    
-    // Detta matchar din bild "nav_click"
-    window.dataLayer.push({
-      'event': 'nav_click',
-      'nav_name': name,         // Detta plockas upp av {{dlv - nav_name}}
-      'gtm_name_val': name     // Detta kan din andra variabel plocka upp
+  // Vi hämtar elementen från HTML-koden
+  const modal = document.getElementById('email-modal');
+  const openBtn = document.getElementById('open-lead-modal');
+  const closeBtn = document.getElementById('close-modal');
+  const leadForm = document.getElementById('lead-form');
+
+  // 1. Öppna rutan när man klickar på knappen
+  if (openBtn) {
+    openBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      modal.style.display = 'flex';
     });
   }
-});
-function trackEvent(eventName, element) {
-  console.log('[Track]', eventName, element); // Behåll loggen så du ser den
-  
-  // DETTA lägger till händelsen i GTM
-  window.dataLayer.push({
-    'event': 'toolbox_click',   // Detta blir ditt Event Name i GTM
-    'button_id': eventName      // Detta läses av din nya variabel
-  });
-}
-</script>
 
+  // 2. Stäng rutan när man klickar på krysset
+  if (closeBtn) {
+    closeBtn.addEventListener('click', function() {
+      modal.style.display = 'none';
+    });
+  }
+
+  // 3. Vad som händer när man klickar på "Hämta rapporten"
+  if (leadForm) {
+    leadForm.addEventListener('submit', function(e) {
+      e.preventDefault(); // Hindrar sidan från att laddas om
+      
+      const email = document.getElementById('lead-email').value;
+
+      // Logga till DataLayer (så du ser mailen i GTM)
+      window.dataLayer.push({
+        'event': 'lead_generated',
+        'lead_email': email
+      });
+
+      // Stäng rutan
+      modal.style.display = 'none';
+
+      // STARTA NEDLADDNINGEN (Samma funktion som din gamla knapp)
+      const link = document.createElement('a');
+      link.href = 'files/White_paper.pdf'; // Se till att filnamnet är rätt här!
+      link.download = 'Rapport_2026.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
+      alert('Tack! Din rapport laddas ner nu.');
+    });
+  }
+</script>
+<script>
+  function toggleWeather() {
+    const popup = document.getElementById('weather-popup');
+    const launcher = document.getElementById('weather-launcher');
+    
+    if (popup.style.display === 'none' || popup.style.display === '') {
+      popup.style.display = 'flex';
+      launcher.style.transform = 'rotate(90deg)';
+    } else {
+      popup.style.display = 'none';
+      launcher.style.transform = 'rotate(0deg)';
+    }
+  }
+</script>
+</div>
 </body>
 </html>
