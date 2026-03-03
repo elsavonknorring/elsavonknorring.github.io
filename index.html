@@ -978,13 +978,13 @@
     }
   </script>
 <script>
-  // Vi hämtar elementen från HTML-koden
+  // 1. Hämta alla nödvändiga element
   const modal = document.getElementById('email-modal');
   const openBtn = document.getElementById('open-lead-modal');
   const closeBtn = document.getElementById('close-modal');
   const leadForm = document.getElementById('lead-form');
 
-  // 1. Öppna rutan när man klickar på knappen
+  // 2. Öppna rutan (Viktigt! Denna saknades i ditt nya korta förslag)
   if (openBtn) {
     openBtn.addEventListener('click', function(e) {
       e.preventDefault();
@@ -992,38 +992,40 @@
     });
   }
 
-  // 2. Stäng rutan när man klickar på krysset
+  // 3. Stäng rutan (Krysset)
   if (closeBtn) {
     closeBtn.addEventListener('click', function() {
       modal.style.display = 'none';
     });
   }
 
-  // 3. Vad som händer när man klickar på "Hämta rapporten"
+  // 4. Hantera inskickat formulär och nedladdning
   if (leadForm) {
     leadForm.addEventListener('submit', function(e) {
-      e.preventDefault(); // Hindrar sidan från att laddas om
+      e.preventDefault(); // Stoppar sidan från att laddas om
       
       const email = document.getElementById('lead-email').value;
 
-      // Logga till DataLayer (så du ser mailen i GTM)
+      // Logga till DataLayer (GTM spårning)
       window.dataLayer.push({
         'event': 'lead_generated',
         'lead_email': email
       });
 
-      // Stäng rutan
-      modal.style.display = 'none';
-
-      // STARTA NEDLADDNINGEN (Samma funktion som din gamla knapp)
-      const link = document.createElement('a');
-      link.href = 'files/White_paper.pdf'; // Se till att filnamnet är rätt här!
-      link.download = 'Rapport_2026.pdf';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      // TRICKET: Starta nedladdningen
+      const downloadLink = document.createElement('a');
+      downloadLink.href = 'files/White_paper.pdf'; // Se till att mappen 'files' och filen finns!
+      downloadLink.download = 'Rapport_2026.pdf';
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
       
+      // Feedback och stäng rutan
       alert('Tack! Din rapport laddas ner nu.');
+      modal.style.display = 'none';
+      
+      // Valfritt: Töm fältet efteråt
+      leadForm.reset();
     });
   }
 </script>
